@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream-100 text-petrol-800 antialiased;
+  }
+
+  ::selection {
+    @apply bg-petrol-200 text-petrol-900;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3
+           bg-lime-400 hover:bg-lime-300
+           text-petrol-900 font-semibold
+           rounded-lg transition-all duration-200
+           shadow-lg shadow-lime-400/25 hover:shadow-xl hover:shadow-lime-400/30
+           hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3
+           bg-transparent border-2 border-petrol-500
+           text-petrol-600 hover:text-petrol-700 font-semibold
+           rounded-lg transition-all duration-200
+           hover:bg-petrol-50 hover:border-petrol-600;
+  }
+
+  .section-container {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl p-6 shadow-sm
+           border border-petrol-100/50
+           transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply hover:shadow-lg hover:border-petrol-200 hover:-translate-y-1;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-petrol-600 to-petrol-500
+           bg-clip-text text-transparent;
+  }
+
+  .section-badge {
+    @apply inline-flex items-center px-3 py-1
+           bg-petrol-100 text-petrol-600
+           text-sm font-medium rounded-full;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-cream-200;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-petrol-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-petrol-400;
+}
+
+/* Focus states */
+*:focus-visible {
+  @apply outline-none ring-2 ring-petrol-400 ring-offset-2 ring-offset-cream-100;
+}
+
+/* Form inputs */
+input, textarea, select {
+  @apply bg-white border border-petrol-200 rounded-lg px-4 py-3
+         text-petrol-800 placeholder:text-petrol-400
+         focus:border-petrol-500 focus:ring-1 focus:ring-petrol-500
+         transition-colors duration-200;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Gradient backgrounds */
+.bg-gradient-radial {
+  background: radial-gradient(ellipse at center, var(--tw-gradient-stops));
+}
+
+.bg-mesh {
+  background-color: #FAF9F7;
+  background-image:
+    radial-gradient(at 40% 20%, rgba(30, 95, 116, 0.03) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, rgba(20, 184, 118, 0.03) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, rgba(250, 204, 21, 0.03) 0px, transparent 50%);
+}
