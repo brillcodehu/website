@@ -37,10 +37,8 @@ export default function Garancia() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-6xl sm:text-7xl lg:text-8xl font-black text-petrol-900 mb-12 leading-[1.1]"
           >
-            Csak akkor fizetsz,
-            <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-500 via-teal-500 to-lime-500">
-              ha tetszik
+              Nem veszíthetsz
             </span>
           </motion.h2>
         </div>

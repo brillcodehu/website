@@ -164,9 +164,6 @@ export default function Hero() {
     document.getElementById("megrendeles")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const scrollToDemo = () => {
-    document.getElementById("demo")?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <section ref={containerRef} className="relative min-h-screen flex items-center pt-8 pb-16 overflow-hidden bg-gradient-to-b from-cream-50 via-cream-100 to-cream-200">
@@ -261,16 +258,16 @@ export default function Hero() {
             ))}
           </motion.div>
 
-          {/* CTAs */}
+          {/* CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.9 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+            className="flex flex-col items-center mb-12"
           >
             <motion.button
               onClick={scrollToForm}
-              className="btn-primary text-lg px-8 py-4 relative overflow-hidden group"
+              className="btn-primary text-lg px-8 py-4 relative overflow-hidden group mb-6"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -281,14 +278,27 @@ export default function Hero() {
                 </svg>
               </span>
             </motion.button>
-            <motion.button
-              onClick={scrollToDemo}
-              className="btn-secondary text-lg px-8 py-4"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+            
+            {/* Capacity info */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.1 }}
+              className="text-center"
             >
-              Megnézem a mintákat
-            </motion.button>
+              <p className="text-petrol-600 text-sm mb-2">
+                Minden projektünkre teljes figyelmet fordítunk, így korlátozott számú megrendelést fogadunk.
+              </p>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-50 rounded-full border border-teal-200">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
+                </span>
+                <span className="text-petrol-700 font-semibold text-sm">
+                  Ma még <span className="text-teal-600 font-bold">{mounted ? capacity : 2}</span> megrendelést tudunk fogadni
+                </span>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Countdown */}

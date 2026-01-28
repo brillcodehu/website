@@ -46,14 +46,28 @@ export default function OrderForm() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch('/api/order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    // In real implementation, send to your backend/email service
-    console.log("Form submitted:", formData);
+      const data = await response.json();
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+      if (!response.ok) {
+        throw new Error(data.error || 'Hiba történt a küldés során');
+      }
+
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert('Hiba történt a megrendelés küldése során. Kérlek próbáld újra vagy írj nekünk: talk@brillcode.hu');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -72,10 +86,10 @@ export default function OrderForm() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            Készen állsz a saját landing oldaladra?
+            Jöhet a sajátod?
           </h2>
           <p className="text-lg text-petrol-200 max-w-2xl mx-auto">
-            Töltsd ki az űrlapot, és 24 órán belül megkapod a kész oldalad.
+            Amennyiben azt látod, hogy van még szabad kapacitásunk, töltsd ki az űrlapot és 24 órán belül megkapod a kész oldalad.
             <br />
             <span className="text-lime-400 font-semibold">9 400 Ft</span> – egyszeri díj, nincs rejtett költség.
           </p>

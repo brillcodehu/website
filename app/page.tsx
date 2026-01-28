@@ -3,7 +3,6 @@ import Problem from "@/components/Problem";
 import Solution from "@/components/Solution";
 import Garancia from "@/components/Garancia";
 import Pricing from "@/components/Pricing";
-import Testimonials from "@/components/Testimonials";
 import RiskReversal from "@/components/RiskReversal";
 import FAQ from "@/components/FAQ";
 import MoreServices from "@/components/MoreServices";
@@ -24,7 +23,6 @@ export default function Home() {
         <Solution />
         <Garancia />
         <Pricing />
-        <Testimonials />
         <RiskReversal />
         <FAQ />
         <MoreServices />

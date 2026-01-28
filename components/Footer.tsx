@@ -21,10 +21,10 @@ export default function Footer() {
           {/* Links */}
           <div className="flex items-center gap-6 text-sm">
             <a
-              href="mailto:hello@brillcode.hu"
+              href="mailto:talk@brillcode.hu"
               className="hover:text-white transition-colors"
             >
-              hello@brillcode.hu
+              talk@brillcode.hu
             </a>
             <a
               href="tel:+36301794259"

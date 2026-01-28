@@ -77,25 +77,45 @@ colors: {
 }
 ```
 
-### Űrlap backend bekötése
+### Email küldés beállítása
 
-Az `components/OrderForm.tsx` fájlban a `handleSubmit` függvényben cseréld ki a szimulált küldést a valódi API hívásra:
+Az űrlap automatikusan küld emailt, amikor valaki kitölti. Két emailt küld:
+1. **Admin email** - neked (értesítés új megrendelésről)
+2. **Visszaigazoló email** - a jelentkezőnek
 
-```typescript
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsSubmitting(true);
+**Lépések:**
 
-  // Ide jön a valódi API hívás
-  const response = await fetch('/api/order', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  });
+1. **Regisztrálj a Resend-en:**
+   - Menj a https://resend.com oldalra
+   - Hozz létre egy ingyenes account-ot
+   - Szerezz be egy API kulcsot
 
-  // ...
-};
-```
+2. **Állítsd be a környezeti változókat:**
+   
+   Hozz létre egy `.env.local` fájlt a projekt gyökerében:
+   ```bash
+   RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxx
+   ADMIN_EMAIL=talk@brillcode.hu
+   FROM_EMAIL=BrillCode <noreply@brillcode.hu>
+   ```
+   
+   **Megjegyzés:** Ha még nincs domain beállítva a Resend-en, használd a default-ot: `FROM_EMAIL=BrillCode <onboarding@resend.dev>`
+
+3. **Domain beállítása (opcionális, de ajánlott):**
+   - A Resend-en add hozzá a saját domain-edet (brillcode.hu)
+   - Ez után a `from` email cím `noreply@brillcode.hu` lesz
+   - Ha nincs domain, használd a Resend default domain-jét (pl. `onboarding@resend.dev`)
+
+4. **Frissítsd az API route-ot:**
+   
+   Az `app/api/order/route.ts` fájlban módosítsd:
+   - `from: 'BrillCode <noreply@brillcode.hu>'` - a saját domain-eddel
+   - `to: process.env.ADMIN_EMAIL` - a saját email címeddel
+
+**Vercel-en:**
+- Add hozzá a környezeti változókat a Vercel dashboard-on
+- Project Settings → Environment Variables
+- Add: `RESEND_API_KEY` és `ADMIN_EMAIL`
 
 ### SEO és metaadatok
 

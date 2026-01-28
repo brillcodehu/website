@@ -151,7 +151,7 @@ export default function FAQ() {
           <p className="text-petrol-600">
             Még mindig van kérdésed?{" "}
             <a
-              href="mailto:hello@brillcode.hu"
+              href="mailto:talk@brillcode.hu"
               className="text-petrol-700 font-semibold hover:text-petrol-800 underline decoration-petrol-300 hover:decoration-petrol-500 transition-colors"
             >
               Írj nekünk
