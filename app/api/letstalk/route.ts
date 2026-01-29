@@ -113,11 +113,12 @@ export async function POST(request: NextRequest) {
       </html>
     `;
 
-    const fromEmail = process.env.FROM_EMAIL || 'BrillCode <onboarding@resend.dev>';
+    // Admin értesítés: boss@-ról, címzett: talk@
+    const adminFromEmail = process.env.ADMIN_FROM_EMAIL || 'BrillCode <boss@brillcode.hu>';
     const adminEmail = process.env.ADMIN_EMAIL || 'talk@brillcode.hu';
 
     const result = await resend.emails.send({
-      from: fromEmail,
+      from: adminFromEmail,
       to: adminEmail,
       subject: `Projekt kérdőív: ${companyName}`,
       html: adminEmailHtml,

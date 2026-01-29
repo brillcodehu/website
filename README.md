@@ -96,26 +96,27 @@ Az űrlap automatikusan küld emailt, amikor valaki kitölti. Két emailt küld:
    ```bash
    RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxx
    ADMIN_EMAIL=talk@brillcode.hu
-   FROM_EMAIL=BrillCode <noreply@brillcode.hu>
+   FROM_EMAIL=BrillCode <talk@brillcode.hu>
+   ADMIN_FROM_EMAIL=BrillCode <boss@brillcode.hu>
    ```
    
-   **Megjegyzés:** Ha még nincs domain beállítva a Resend-en, használd a default-ot: `FROM_EMAIL=BrillCode <onboarding@resend.dev>`
+   **Megjegyzés:** A kód alapértelmezetten `talk@brillcode.hu`-t használ; ha nincs domain a Resend-en, állítsd be ott a domainet, vagy add meg a `FROM_EMAIL`-t.
 
 3. **Domain beállítása (opcionális, de ajánlott):**
    - A Resend-en add hozzá a saját domain-edet (brillcode.hu)
-   - Ez után a `from` email cím `noreply@brillcode.hu` lesz
+   - Ez után a `from` email cím `talk@brillcode.hu` lesz
    - Ha nincs domain, használd a Resend default domain-jét (pl. `onboarding@resend.dev`)
 
 4. **Frissítsd az API route-ot:**
    
    Az `app/api/order/route.ts` fájlban módosítsd:
-   - `from: 'BrillCode <noreply@brillcode.hu>'` - a saját domain-eddel
+   - `from: 'BrillCode <talk@brillcode.hu>'` - a saját domain-eddel
    - `to: process.env.ADMIN_EMAIL` - a saját email címeddel
 
 **Vercel-en:**
 - Add hozzá a környezeti változókat a Vercel dashboard-on
 - Project Settings → Environment Variables
-- Add: `RESEND_API_KEY` és `ADMIN_EMAIL`
+- Add: `RESEND_API_KEY`, `ADMIN_EMAIL`, opcionálisan `ADMIN_FROM_EMAIL` (admin értesítések feladója, alapértelmezett: boss@brillcode.hu)
 
 ### SEO és metaadatok
 

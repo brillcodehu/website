@@ -190,14 +190,15 @@ export async function POST(request: NextRequest) {
       </html>
     `;
 
-    // Email küldése
-    const fromEmail = process.env.FROM_EMAIL || 'BrillCode <onboarding@resend.dev>';
+    // Email küldése: admin értesítés boss@-ról, ügyfélnek szólók talk@-ról
+    const fromEmail = process.env.FROM_EMAIL || 'BrillCode <talk@brillcode.hu>';
+    const adminFromEmail = process.env.ADMIN_FROM_EMAIL || 'BrillCode <boss@brillcode.hu>';
     const adminEmail = process.env.ADMIN_EMAIL || 'talk@brillcode.hu';
 
     const [adminResult, customerResult, followUpResult] = await Promise.all([
-      // Admin email
+      // Admin email – csak ez megy boss@-ról
       resend.emails.send({
-        from: fromEmail,
+        from: adminFromEmail,
         to: adminEmail,
         subject: `Új megrendelés: ${business} - ${name}`,
         html: adminEmailHtml,
