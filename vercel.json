@@ -1,8 +1,3 @@
 {
-  "regions": ["fra1"],
-  "functions": {
-    "app/api/**/*.ts": {
-      "regions": ["fra1"]
-    }
-  }
+  "regions": ["fra1"]
 }
