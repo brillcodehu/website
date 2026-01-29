@@ -267,7 +267,7 @@ export default function Hero() {
           >
             <motion.button
               onClick={scrollToForm}
-              className="btn-primary text-lg px-8 py-4 relative overflow-hidden group mb-6"
+              className="btn-primary text-lg px-8 py-4 relative overflow-hidden group mb-8"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -279,24 +279,40 @@ export default function Hero() {
               </span>
             </motion.button>
             
-            {/* Capacity info */}
+            {/* Capacity info box */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.6, delay: 1.1 }}
-              className="text-center"
+              className="w-full max-w-md"
             >
-              <p className="text-petrol-600 text-sm mb-2">
-                Minden projektünkre teljes figyelmet fordítunk, így korlátozott számú megrendelést fogadunk.
-              </p>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-50 rounded-full border border-teal-200">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
-                </span>
-                <span className="text-petrol-700 font-semibold text-sm">
-                  Ma még <span className="text-teal-600 font-bold">{mounted ? capacity : 2}</span> megrendelést tudunk fogadni
-                </span>
+              <div className="relative bg-gradient-to-br from-teal-50 via-lime-50 to-teal-50 rounded-2xl p-6 border-2 border-teal-200/50 shadow-lg backdrop-blur-sm">
+                {/* Icon */}
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-teal-500 to-lime-500 rounded-xl flex items-center justify-center shadow-md">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  
+                  <div className="flex-1">
+                    <p className="text-petrol-800 font-semibold mb-2 leading-relaxed">
+                      Minden projektünkre teljes figyelmet fordítunk, így korlátozott számú megrendelést fogadunk.
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <span className="relative flex h-2.5 w-2.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-500"></span>
+                      </span>
+                      <span className="text-petrol-700 font-bold text-base">
+                        Ma még <span className="text-teal-600 text-lg">{mounted ? capacity : 2}</span> megrendelést tudunk fogadni
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Decorative corner */}
+                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-teal-400/10 to-transparent rounded-bl-full"></div>
               </div>
             </motion.div>
           </motion.div>
