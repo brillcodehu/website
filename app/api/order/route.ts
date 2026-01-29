@@ -1,12 +1,13 @@
 import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.json();
     const { name, email, phone, business, goal, style, notes } = formData;
+
+    // Resend inicializálása a függvényen belül
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     // Validáció
     if (!name || !email || !business || !goal) {
