@@ -42,8 +42,8 @@ export default function Problem() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="mb-8"
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="mb-8 motion-div"
           >
             <span className="text-red-400 text-sm font-semibold tracking-widest uppercase">
               A probléma
@@ -53,8 +53,8 @@ export default function Problem() {
           <motion.h2
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight"
+            transition={{ duration: 0.2, delay: 0.1, ease: "easeOut" }}
+            className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight motion-div"
           >
             Miért nem működnek
             <br />
@@ -66,8 +66,8 @@ export default function Problem() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
-            className="text-xl text-petrol-300 max-w-2xl mx-auto"
+            transition={{ duration: 0.2, delay: 0.2, ease: "easeOut" }}
+            className="text-xl text-petrol-300 max-w-2xl mx-auto motion-div"
           >
             Láttad már azt az oldalt, ahol minden stimmel, mégsem kattintasz?
           </motion.p>
