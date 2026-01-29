@@ -4,6 +4,8 @@ import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import { getCountdownEnd, formatCountdown, getRandomCapacity } from "@/lib/countdown";
 
+// initial={false} = tartalom látható azonnal (SSR + első paint). Ha opacity:0 lenne, localhoston hydration késésnél fehér képernyő.
+
 // Animated background shapes
 function FloatingShapes() {
   return (
@@ -112,7 +114,7 @@ function AnimatedPrice() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={false}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: 0.6 }}
       className="relative inline-flex items-center gap-3 bg-gradient-to-r from-petrol-800 via-petrol-700 to-petrol-800 px-6 py-4 rounded-2xl shadow-2xl shadow-petrol-900/30 border border-petrol-600/50"
@@ -128,7 +130,7 @@ function AnimatedPrice() {
         <span className="text-xl font-bold text-lime-400">Ft</span>
       </div>
       <motion.div
-        initial={{ scale: 0 }}
+        initial={false}
         animate={{ scale: 1 }}
         transition={{ delay: 2.3, type: "spring", stiffness: 200 }}
         className="absolute -top-3 -right-3 bg-lime-400 text-petrol-900 text-xs font-bold px-2 py-1 rounded-full shadow-lg"
@@ -173,7 +175,7 @@ export default function Hero() {
         <div className="max-w-4xl mx-auto text-center">
           {/* Capacity indicator - new style */}
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="mb-8"
@@ -191,7 +193,7 @@ export default function Hero() {
 
           {/* Headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-7xl font-black text-petrol-900 mb-6 leading-[1.1] tracking-tight"
@@ -204,7 +206,7 @@ export default function Hero() {
               </span>
               <motion.span
                 className="absolute -bottom-2 left-0 right-0 h-3 bg-lime-400/30 -skew-x-12 rounded"
-                initial={{ scaleX: 0 }}
+                initial={false}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 0.5, delay: 0.8 }}
               />
@@ -213,7 +215,7 @@ export default function Hero() {
 
           {/* Subheadline */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-lg sm:text-xl text-petrol-600 mb-10 max-w-2xl mx-auto leading-relaxed"
@@ -225,7 +227,7 @@ export default function Hero() {
 
           {/* Price display */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
             className="mb-10 relative inline-block"
@@ -235,7 +237,7 @@ export default function Hero() {
 
           {/* Benefits */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
             className="flex flex-wrap justify-center gap-6 mb-10"
@@ -247,7 +249,7 @@ export default function Hero() {
             ].map((benefit, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: -20 }}
+                initial={false}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.4, delay: 0.8 + index * 0.1 }}
                 className="flex items-center gap-2 text-petrol-700"
@@ -260,7 +262,7 @@ export default function Hero() {
 
           {/* CTA */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.9 }}
             className="flex flex-col items-center mb-12"
@@ -281,7 +283,7 @@ export default function Hero() {
             
             {/* Capacity info box */}
             <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              initial={false}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.6, delay: 1.1 }}
               className="w-full max-w-md"
@@ -319,7 +321,7 @@ export default function Hero() {
 
           {/* Countdown */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.1 }}
             className="inline-flex flex-col items-center"
@@ -345,7 +347,7 @@ export default function Hero() {
 
           {/* Trust indicators */}
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={false}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 1.3 }}
             className="mt-12 flex flex-wrap justify-center gap-6 text-sm text-petrol-500"

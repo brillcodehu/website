@@ -61,6 +61,9 @@ export default function OrderForm() {
       }
 
       setIsSubmitted(true);
+      // Meta Pixel: Purchase konverzió
+      const w = typeof window !== "undefined" ? (window as unknown as { fbq?: (a: string, b: string, c?: object) => void }) : null;
+      if (w?.fbq) w.fbq("track", "Purchase", { value: 9400, currency: "HUF" });
     } catch (error) {
       console.error('Form submission error:', error);
       alert('Hiba történt a megrendelés küldése során. Kérlek próbáld újra vagy írj nekünk: talk@brillcode.hu');
