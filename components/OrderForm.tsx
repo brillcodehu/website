@@ -91,7 +91,7 @@ export default function OrderForm() {
 
         <div className={`max-w-2xl mx-auto fade-in fade-in-delay-1 ${isInView ? 'visible' : ''}`}>
           {isSubmitted ? (
-            <div className="bg-white rounded-2xl p-8 md:p-12 text-center">
+            <div className="bg-white rounded-2xl p-8 md:p-12 text-center fade-in-scale">
                 <div className="w-20 h-20 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   <svg
                     className="w-10 h-10 text-teal-500"
@@ -129,11 +129,11 @@ export default function OrderForm() {
           ) : (
             <form
               onSubmit={handleSubmit}
-              className="bg-white rounded-2xl p-8 md:p-10 shadow-2xl"
+              className="bg-white rounded-2xl p-8 md:p-10 shadow-2xl fade-in-scale"
             >
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Name */}
-                  <div>
+                  <div className="fade-in fade-in-stagger-0">
                     <label htmlFor="name" className="block text-sm font-medium text-petrol-700 mb-2">
                       Név *
                     </label>
@@ -150,7 +150,7 @@ export default function OrderForm() {
                   </div>
 
                   {/* Email */}
-                  <div>
+                  <div className="fade-in fade-in-stagger-1">
                     <label htmlFor="email" className="block text-sm font-medium text-petrol-700 mb-2">
                       E-mail *
                     </label>
@@ -167,7 +167,7 @@ export default function OrderForm() {
                   </div>
 
                   {/* Phone */}
-                  <div>
+                  <div className="fade-in fade-in-stagger-2">
                     <label htmlFor="phone" className="block text-sm font-medium text-petrol-700 mb-2">
                       Telefonszám
                     </label>
@@ -183,7 +183,7 @@ export default function OrderForm() {
                   </div>
 
                   {/* Business name */}
-                  <div>
+                  <div className="fade-in fade-in-stagger-3">
                     <label htmlFor="business" className="block text-sm font-medium text-petrol-700 mb-2">
                       Cégnév / Márkanév *
                     </label>
@@ -200,7 +200,7 @@ export default function OrderForm() {
                   </div>
 
                   {/* Goal */}
-                  <div>
+                  <div className="fade-in fade-in-stagger-4">
                     <label htmlFor="goal" className="block text-sm font-medium text-petrol-700 mb-2">
                       Mi a cél? *
                     </label>
@@ -222,7 +222,7 @@ export default function OrderForm() {
                   </div>
 
                   {/* Style */}
-                  <div>
+                  <div className="fade-in fade-in-stagger-5">
                     <label htmlFor="style" className="block text-sm font-medium text-petrol-700 mb-2">
                       Stílus preferencia
                     </label>
@@ -244,7 +244,7 @@ export default function OrderForm() {
                 </div>
 
                 {/* Notes */}
-                <div className="mt-6">
+                <div className="mt-6 fade-in fade-in-delay-3">
                   <label htmlFor="notes" className="block text-sm font-medium text-petrol-700 mb-2">
                     Bármi amit még tudnunk kell
                   </label>

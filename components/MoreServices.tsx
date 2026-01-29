@@ -102,26 +102,26 @@ export default function MoreServices() {
               key={index}
               className={`relative group fade-in-scale fade-in-stagger-${Math.min(index, 4)} ${isInView ? 'visible' : ''}`}
             >
-              {/* Glow effect */}
-              <div className={`absolute -inset-[1px] bg-gradient-to-r ${service.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`} />
+              {/* Enhanced glow effect */}
+              <div className={`absolute -inset-[2px] bg-gradient-to-r ${service.color} rounded-3xl blur-2xl opacity-0 group-hover:opacity-40 transition-all duration-500`} />
 
-              <div className="relative bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-8 h-full overflow-hidden">
+              <div className="relative bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-8 h-full overflow-hidden transition-all duration-300 group-hover:border-white/20 group-hover:scale-[1.02] group-hover:-translate-y-1">
                 {/* Background gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
 
                 <div className="relative z-10">
-                  {/* Icon */}
-                  <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg transition-transform duration-200 hover:scale-110 hover:rotate-3`}>
+                  {/* Icon with enhanced hover */}
+                  <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-xl group-hover:shadow-teal-500/50`}>
                     {service.icon}
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-teal-100 transition-colors">
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-teal-100 transition-colors duration-300">
                     {service.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-petrol-300 leading-relaxed">
+                  <p className="text-petrol-300 leading-relaxed group-hover:text-petrol-200 transition-colors duration-300">
                     {service.description}
                   </p>
                 </div>
