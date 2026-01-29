@@ -12,11 +12,10 @@ const goals = [
   "Egyéb",
 ];
 
-const styles = [
-  "Letisztult üzleti",
-  "Modern tech",
-  "Konverziófókusz",
-  "Mindegy, ti döntsétek",
+const hasWebsiteOptions = [
+  { value: "", label: "Válassz..." },
+  { value: "Igen", label: "Igen" },
+  { value: "Nem", label: "Nem" },
 ];
 
 export default function OrderForm() {
@@ -30,7 +29,7 @@ export default function OrderForm() {
     phone: "",
     business: "",
     goal: "",
-    style: "",
+    hasWebsite: "",
     notes: "",
   });
 
@@ -224,22 +223,21 @@ export default function OrderForm() {
                     </select>
                   </div>
 
-                  {/* Style */}
+                  {/* Van már weboldalad? */}
                   <div className="fade-in fade-in-stagger-5">
-                    <label htmlFor="style" className="block text-sm font-medium text-petrol-700 mb-2">
-                      Stílus preferencia
+                    <label htmlFor="hasWebsite" className="block text-sm font-medium text-petrol-700 mb-2">
+                      Van már weboldalad?
                     </label>
                     <select
-                      id="style"
-                      name="style"
-                      value={formData.style}
+                      id="hasWebsite"
+                      name="hasWebsite"
+                      value={formData.hasWebsite}
                       onChange={handleChange}
                       className="w-full"
                     >
-                      <option value="">Válassz...</option>
-                      {styles.map((style) => (
-                        <option key={style} value={style}>
-                          {style}
+                      {hasWebsiteOptions.map((opt) => (
+                        <option key={opt.value || "empty"} value={opt.value}>
+                          {opt.label}
                         </option>
                       ))}
                     </select>

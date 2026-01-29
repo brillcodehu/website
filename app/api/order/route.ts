@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.json();
-    const { name, email, phone, business, goal, style, notes } = formData;
+    const { name, email, phone, business, goal, hasWebsite, notes } = formData;
 
     // Resend inicializálása a függvényen belül
     const resend = new Resend(process.env.RESEND_API_KEY);
@@ -45,38 +45,32 @@ export async function POST(request: NextRequest) {
               <div class="highlight">
                 <div class="field">
                   <span class="label">Név:</span>
-                  <span class="value">${name}</span>
+                  <span class="value">${name || '–'}</span>
                 </div>
                 <div class="field">
                   <span class="label">Email:</span>
-                  <span class="value">${email}</span>
+                  <span class="value">${email || '–'}</span>
                 </div>
-                ${phone ? `
                 <div class="field">
                   <span class="label">Telefonszám:</span>
-                  <span class="value">${phone}</span>
+                  <span class="value">${phone ? phone : '–'}</span>
                 </div>
-                ` : ''}
                 <div class="field">
                   <span class="label">Cégnév / Márkanév:</span>
-                  <span class="value">${business}</span>
+                  <span class="value">${business || '–'}</span>
                 </div>
                 <div class="field">
-                  <span class="label">Cél:</span>
-                  <span class="value">${goal}</span>
+                  <span class="label">Mi a cél?:</span>
+                  <span class="value">${goal || '–'}</span>
                 </div>
-                ${style ? `
                 <div class="field">
-                  <span class="label">Stílus preferencia:</span>
-                  <span class="value">${style}</span>
+                  <span class="label">Van már weboldalad?:</span>
+                  <span class="value">${hasWebsite ? hasWebsite : '–'}</span>
                 </div>
-                ` : ''}
-                ${notes ? `
                 <div class="field">
-                  <span class="label">Megjegyzés:</span>
-                  <span class="value">${notes}</span>
+                  <span class="label">Bármi amit még tudnunk kell:</span>
+                  <span class="value">${notes ? notes.replace(/\n/g, '<br>') : '–'}</span>
                 </div>
-                ` : ''}
               </div>
 
               <p style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #eee;">
