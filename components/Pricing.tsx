@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
 
 const included = [
@@ -67,40 +67,25 @@ export default function Pricing() {
       <div ref={ref} className="section-container relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="inline-flex items-center gap-3 mb-6"
-          >
+          <div className={`inline-flex items-center gap-3 mb-6 fade-in ${isInView ? 'visible' : ''}`}>
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-lime-500/50" />
             <span className="text-lime-600 text-sm font-medium tracking-widest uppercase">
               Árazás
             </span>
             <div className="h-px w-12 bg-gradient-to-l from-transparent to-lime-500/50" />
-          </motion.div>
+          </div>
 
-          <motion.h2
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.3, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-black text-petrol-900 mb-6 leading-tight"
-          >
+          <h2 className={`text-4xl sm:text-5xl lg:text-6xl font-black text-petrol-900 mb-6 leading-tight fade-in fade-in-delay-1 ${isInView ? 'visible' : ''}`}>
             Egyszerű, tiszta
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-500 via-teal-500 to-lime-500">
               árazás
             </span>
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.3, delay: 0.2 }}
-            className="text-lg text-petrol-600 max-w-2xl mx-auto"
-          >
+          <p className={`text-lg text-petrol-600 max-w-2xl mx-auto fade-in fade-in-delay-2 ${isInView ? 'visible' : ''}`}>
             Nincs rejtett költség, nincs meglepetés. Tudod előre, mit kapsz.
-          </motion.p>
+          </p>
         </div>
 
         <div className="max-w-5xl mx-auto">
@@ -125,20 +110,11 @@ export default function Pricing() {
                 <div className="relative bg-gradient-to-br from-white via-white to-lime-50/50 rounded-3xl shadow-2xl overflow-hidden border border-lime-200">
                   {/* Animated background */}
                   <div className="absolute inset-0 overflow-hidden">
-                    <motion.div
-                      className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-br from-lime-100/50 to-transparent rounded-full"
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                    />
+                    <div className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-br from-lime-100/50 to-transparent rounded-full animate-spin-slow" />
                   </div>
 
                   {/* Popular badge */}
-                  <motion.div
-                    className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20"
-                    initial={{ scale: 0 }}
-                    animate={isInView ? { scale: 1 } : { scale: 0 }}
-                    transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
-                  >
+                  <div className={`absolute top-4 right-4 sm:top-6 sm:right-6 z-20 fade-in fade-in-delay-5 ${isInView ? 'visible' : ''}`}>
                     <div className="relative">
                       <div className="absolute inset-0 bg-lime-400 rounded-full blur-lg opacity-50" />
                       <div className="relative bg-gradient-to-r from-lime-400 to-lime-500 text-petrol-900 text-xs sm:text-sm font-bold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-lg">
@@ -155,24 +131,15 @@ export default function Pricing() {
                         Egyedi Landing Oldal
                       </h3>
                       <div className="relative inline-block">
-                        <motion.div
-                          className="flex items-end justify-center gap-1 sm:gap-2"
-                          animate={{ scale: isHovered ? 1.05 : 1 }}
-                          transition={{ duration: 0.2, ease: "easeOut" }}
-                        >
+                        <div className={`flex items-end justify-center gap-1 sm:gap-2 transition-transform duration-200 ${isHovered ? 'scale-105' : 'scale-100'}`}>
                           <span className="text-5xl sm:text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-petrol-800 to-petrol-600">
                             9 400
                           </span>
                           <span className="text-2xl sm:text-3xl font-bold text-lime-600 mb-1 sm:mb-2">Ft</span>
-                        </motion.div>
-                        <motion.div
-                          className="absolute -top-3 sm:-top-4 -right-6 sm:-right-8 text-petrol-400 line-through text-sm sm:text-lg"
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-                          transition={{ delay: 0.6 }}
-                        >
+                        </div>
+                        <div className={`absolute -top-3 sm:-top-4 -right-6 sm:-right-8 text-petrol-400 line-through text-sm sm:text-lg fade-in fade-in-delay-6 ${isInView ? 'visible' : ''}`}>
                           49 900 Ft
-                        </motion.div>
+                        </div>
                       </div>
                       <p className="text-petrol-500 mt-3 text-sm sm:text-base">Egyszeri díj, nincs előfizetés</p>
                     </div>
@@ -189,18 +156,15 @@ export default function Pricing() {
                       </h4>
                       <ul className="grid sm:grid-cols-2 gap-2 sm:gap-3">
                         {included.map((item, index) => (
-                          <motion.li
+                          <li
                             key={index}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                            transition={{ delay: 0.3 + index * 0.05 }}
-                            className="flex items-start gap-2 sm:gap-3 group/item"
+                            className={`flex items-start gap-2 sm:gap-3 group/item fade-in fade-in-stagger-${Math.min(index, 4)} ${isInView ? 'visible' : ''}`}
                           >
                             <svg className="w-4 h-4 sm:w-5 sm:h-5 text-teal-500 flex-shrink-0 mt-0.5 group-hover/item:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                             </svg>
                             <span className="text-sm sm:text-base text-petrol-700">{item}</span>
-                          </motion.li>
+                          </li>
                         ))}
                       </ul>
                     </div>
@@ -225,11 +189,9 @@ export default function Pricing() {
                     </div>
 
                     {/* CTA */}
-                    <motion.button
+                    <button
                       onClick={scrollToForm}
-                      className="relative w-full overflow-hidden group/btn"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      className="relative w-full overflow-hidden group/btn transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]"
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-lime-500 via-lime-400 to-lime-500 group-hover/btn:from-lime-400 group-hover/btn:to-lime-500 transition-all duration-300" />
                       <div className="absolute inset-0 bg-gradient-to-r from-lime-400 to-lime-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
@@ -239,19 +201,14 @@ export default function Pricing() {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
                       </div>
-                    </motion.button>
+                    </button>
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Extras card */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.3, delay: 0.3 }}
-              className="lg:col-span-2 w-full"
-            >
+            <div className={`lg:col-span-2 w-full fade-in fade-in-delay-3 ${isInView ? 'visible' : ''}`}>
               <div className="relative group h-full">
                 {/* Subtle glow */}
                 <div className="absolute -inset-[1px] bg-gradient-to-b from-petrol-200 to-petrol-300 rounded-3xl opacity-0 group-hover:opacity-50 blur-xl transition-opacity duration-500" />
@@ -298,10 +255,10 @@ export default function Pricing() {
                         <strong className="text-petrol-800">Tipp:</strong> Ha nem vagy biztos benne, mire van szükséged, az űrlapon jelezd – segítünk eldönteni.
                       </p>
                     </div>
-                  </motion.div>
+                  </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
 
         </div>

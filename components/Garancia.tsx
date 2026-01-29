@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { useInView } from "framer-motion";
 import { useRef } from "react";
 
 export default function Garancia() {
@@ -20,52 +20,32 @@ export default function Garancia() {
       <div ref={ref} className="section-container relative z-10">
         {/* Main message - huge and bold */}
         <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="mb-8"
-          >
+          <div className={`mb-8 fade-in ${isInView ? 'visible' : ''}`}>
             <span className="text-lime-600 text-sm font-semibold tracking-widest uppercase">
               Garancia
             </span>
-          </motion.div>
+          </div>
 
-          <motion.h2
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.3, delay: 0.1 }}
-            className="text-6xl sm:text-7xl lg:text-8xl font-black text-petrol-900 mb-12 leading-[1.1]"
-          >
+          <h2 className={`text-6xl sm:text-7xl lg:text-8xl font-black text-petrol-900 mb-12 leading-[1.1] fade-in fade-in-delay-1 ${isInView ? 'visible' : ''}`}>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-500 via-teal-500 to-lime-500">
               Nem veszíthetsz
             </span>
-          </motion.h2>
+          </h2>
         </div>
 
         {/* Central statement box */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.3, delay: 0.2 }}
-          className="max-w-4xl mx-auto mb-16"
-        >
+        <div className={`max-w-4xl mx-auto mb-16 fade-in fade-in-delay-2 ${isInView ? 'visible' : ''}`}>
           <div className="relative">
             {/* Glow effect */}
             <div className="absolute -inset-4 bg-gradient-to-r from-lime-400/20 via-teal-400/20 to-lime-400/20 rounded-3xl blur-2xl" />
 
             <div className="relative bg-white rounded-3xl p-12 md:p-16 border-2 border-lime-200 shadow-2xl">
               {/* Large checkmark icon */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.3, delay: 0.3 }}
-                className="w-24 h-24 bg-gradient-to-br from-lime-400 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-lg"
-              >
+              <div className={`w-24 h-24 bg-gradient-to-br from-lime-400 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-lg fade-in fade-in-delay-3 ${isInView ? 'visible' : ''}`}>
                 <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                 </svg>
-              </motion.div>
+              </div>
 
               {/* Main statement */}
               <h3 className="text-4xl sm:text-5xl font-black text-petrol-900 text-center mb-8 leading-tight">
@@ -85,15 +65,10 @@ export default function Garancia() {
               </p>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Simple points */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.3, delay: 0.4 }}
-          className="max-w-3xl mx-auto"
-        >
+        <div className={`max-w-3xl mx-auto fade-in fade-in-delay-4 ${isInView ? 'visible' : ''}`}>
           <div className="grid md:grid-cols-3 gap-8 text-center">
             {[
               { text: "24 óra alatt kész" },
@@ -112,20 +87,15 @@ export default function Garancia() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Bottom emphasis */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mt-16"
-        >
+        <div className={`text-center mt-16 fade-in fade-in-delay-6 ${isInView ? 'visible' : ''}`}>
           <p className="text-2xl text-petrol-700 font-bold">
             Nincs rejtett költség. 
             <span className="text-lime-600"> Csak akkor fizetsz, ha elégedett vagy.</span>
           </p>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
