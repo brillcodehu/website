@@ -141,15 +141,19 @@ function AnimatedPrice() {
   );
 }
 
-export default function Hero() {
+type HeroProps = { capacity?: number };
+
+export default function Hero({ capacity: propCapacity }: HeroProps) {
   const [countdown, setCountdown] = useState({ hours: "23", minutes: "59", seconds: "59", expired: false });
-  const [capacity, setCapacity] = useState(2);
+  const [capacity, setCapacity] = useState(propCapacity ?? 2);
+  const displayCapacity = propCapacity ?? capacity;
   const [mounted, setMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
-    setCapacity(getRandomCapacity());
+    if (propCapacity != null) setCapacity(propCapacity);
+    else setCapacity(getRandomCapacity());
 
     const updateCountdown = () => {
       const endTime = getCountdownEnd();
@@ -160,7 +164,7 @@ export default function Hero() {
     const interval = setInterval(updateCountdown, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [propCapacity]);
 
   const scrollToForm = () => {
     document.getElementById("megrendeles")?.scrollIntoView({ behavior: "smooth" });
@@ -186,7 +190,7 @@ export default function Hero() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
               </span>
               <span className="text-petrol-600 font-medium">
-                Ma még <span className="text-teal-600 font-bold">{mounted ? capacity : 2}</span> megrendelést tudunk fogadni
+                Ma még <span className="text-teal-600 font-bold">{mounted ? displayCapacity : (propCapacity ?? 2)}</span> megrendelést tudunk fogadni
               </span>
             </div>
           </motion.div>
@@ -307,7 +311,7 @@ export default function Hero() {
                         <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-500"></span>
                       </span>
                       <span className="text-petrol-700 font-bold text-base">
-                        Ma még <span className="text-teal-600 text-lg">{mounted ? capacity : 2}</span> megrendelést tudunk fogadni
+                        Ma még <span className="text-teal-600 text-lg">{mounted ? displayCapacity : (propCapacity ?? 2)}</span> megrendelést tudunk fogadni
                       </span>
                     </div>
                   </div>

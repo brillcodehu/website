@@ -2,17 +2,13 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { getRandomCapacity } from "@/lib/countdown";
 
-export default function MobileBottomCTA() {
+type MobileBottomCTAProps = { capacity: number };
+
+export default function MobileBottomCTA({ capacity }: MobileBottomCTAProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const [capacity, setCapacity] = useState(2);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    setCapacity(getRandomCapacity());
-
     const handleScroll = () => {
       // Show after scrolling past hero, hide near the order form
       const orderForm = document.getElementById("megrendeles");
@@ -45,7 +41,7 @@ export default function MobileBottomCTA() {
           {/* Price and capacity */}
           <div>
             <div className="font-bold text-petrol-800">9 400 Ft</div>
-            {mounted && capacity > 0 && (
+            {capacity > 0 && (
               <div className="text-xs text-petrol-500 flex items-center gap-1">
                 <span className="w-1.5 h-1.5 bg-teal-500 rounded-full animate-pulse" />
                 Ma még {capacity} hely

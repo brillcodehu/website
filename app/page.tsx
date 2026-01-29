@@ -14,14 +14,21 @@ const FAQ = dynamic(() => import("@/components/FAQ"), { ssr: true });
 const MoreServices = dynamic(() => import("@/components/MoreServices"), { ssr: true });
 const OrderForm = dynamic(() => import("@/components/OrderForm"), { ssr: true });
 
+// Egy szám mindenhol (Hero + mobil alsó sáv). Determinisztikus, hogy ne legyen hydration mismatch.
+function getCapacity() {
+  const d = new Date();
+  return (d.getDate() + d.getHours()) % 3 + 1;
+}
+
 export default function Home() {
+  const capacity = getCapacity();
   return (
     <>
       <StickyHeader />
-      <MobileBottomCTA />
+      <MobileBottomCTA capacity={capacity} />
 
       <main>
-        <Hero />
+        <Hero capacity={capacity} />
         <Problem />
         <Solution />
         <Garancia />
