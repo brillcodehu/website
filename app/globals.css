@@ -98,19 +98,18 @@ input, textarea, select {
 }
 
 /* CSS Transitions for animations - MUCH faster than Framer Motion */
-/* Elements are visible by default, animate when Intersection Observer triggers */
+/* Elements are ALWAYS visible - no hiding */
 .fade-in {
-  opacity: 1;
-  transform: translateY(0) translateZ(0) scale(1);
+  opacity: 1 !important;
+  transform: translateY(0) translateZ(0) scale(1) !important;
   transition: opacity 0.4s ease-out, transform 0.4s ease-out;
   will-change: opacity, transform;
   backface-visibility: hidden;
 }
 
-/* Animate in when visible class is added */
 .fade-in.visible {
-  opacity: 1;
-  transform: translateY(0) translateZ(0) scale(1);
+  opacity: 1 !important;
+  transform: translateY(0) translateZ(0) scale(1) !important;
 }
 
 .fade-in-delay-1 {
@@ -147,22 +146,22 @@ input, textarea, select {
 
 /* Subtle scale animation */
 .fade-in-scale {
-  opacity: 1;
-  transform: scale(1) translateZ(0);
+  opacity: 1 !important;
+  transform: scale(1) translateZ(0) !important;
   transition: opacity 0.4s ease-out, transform 0.4s ease-out;
   will-change: opacity, transform;
   backface-visibility: hidden;
 }
 
 .fade-in-scale.visible {
-  opacity: 1;
-  transform: scale(1) translateZ(0);
+  opacity: 1 !important;
+  transform: scale(1) translateZ(0) !important;
 }
 
-/* Blur fade-in for special effects */
+/* Blur fade-in for special effects - always visible */
 .fade-in-blur {
-  opacity: 0;
-  filter: blur(8px);
+  opacity: 1 !important;
+  filter: blur(0) !important;
   transform: translateZ(0);
   transition: opacity 0.5s ease-out, filter 0.5s ease-out;
   will-change: opacity, filter;
@@ -170,8 +169,8 @@ input, textarea, select {
 }
 
 .fade-in-blur.visible {
-  opacity: 1;
-  filter: blur(0);
+  opacity: 1 !important;
+  filter: blur(0) !important;
 }
 
 /* Scale animation for line */
