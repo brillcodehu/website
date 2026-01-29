@@ -91,21 +91,14 @@ export default function Pricing() {
         <div className="max-w-5xl mx-auto">
           <div className="grid lg:grid-cols-5 gap-6 lg:gap-8">
             {/* Main pricing card */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-              className="lg:col-span-3 w-full"
+            <div
+              className={`lg:col-span-3 w-full fade-in fade-in-delay-1 ${isInView ? 'visible' : ''}`}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
               <div className="relative group">
                 {/* Glow effect */}
-                <motion.div
-                  className="absolute -inset-[2px] bg-gradient-to-r from-lime-500 via-teal-500 to-lime-500 rounded-3xl blur-xl"
-                  animate={{ opacity: isHovered ? 0.5 : 0.3 }}
-                  transition={{ duration: 0.4 }}
-                />
+                <div className={`absolute -inset-[2px] bg-gradient-to-r from-lime-500 via-teal-500 to-lime-500 rounded-3xl blur-xl transition-opacity duration-400 ${isHovered ? 'opacity-50' : 'opacity-30'}`} />
 
                 <div className="relative bg-gradient-to-br from-white via-white to-lime-50/50 rounded-3xl shadow-2xl overflow-hidden border border-lime-200">
                   {/* Animated background */}
@@ -122,7 +115,7 @@ export default function Pricing() {
                         <span className="sm:hidden">Legjobb</span>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
 
                   <div className="relative p-6 sm:p-8 md:p-10">
                     {/* Price */}
@@ -224,18 +217,15 @@ export default function Pricing() {
                   </h3>
                   <ul className="space-y-3 sm:space-y-4">
                     {extras.map((extra, index) => (
-                      <motion.li
+                      <li
                         key={index}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-                        transition={{ delay: 0.5 + index * 0.1 }}
-                        className="flex items-center justify-between py-2 sm:py-3 border-b border-petrol-50 last:border-0 group/extra hover:bg-petrol-50/50 -mx-2 px-2 rounded-lg transition-colors"
+                        className={`flex items-center justify-between py-2 sm:py-3 border-b border-petrol-50 last:border-0 group/extra hover:bg-petrol-50/50 -mx-2 px-2 rounded-lg transition-colors fade-in fade-in-stagger-${Math.min(index, 4)} ${isInView ? 'visible' : ''}`}
                       >
                         <span className="text-sm sm:text-base text-petrol-700">{extra.name}</span>
                         <span className="font-bold text-petrol-600 whitespace-nowrap ml-2 sm:ml-4 bg-petrol-50 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm group-hover/extra:bg-petrol-100 transition-colors">
                           {extra.price}
                         </span>
-                      </motion.li>
+                      </li>
                     ))}
                   </ul>
 
