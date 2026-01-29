@@ -40,9 +40,9 @@ export default function Problem() {
         {/* Header */}
         <div className="text-center mb-24">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.4 }}
             className="mb-8"
           >
             <span className="text-red-400 text-sm font-semibold tracking-widest uppercase">
@@ -51,9 +51,9 @@ export default function Problem() {
           </motion.div>
 
           <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
             className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight"
           >
             Miért nem működnek
@@ -64,9 +64,9 @@ export default function Problem() {
           </motion.h2>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
             className="text-xl text-petrol-300 max-w-2xl mx-auto"
           >
             Láttad már azt az oldalt, ahol minden stimmel, mégsem kattintasz?
@@ -78,9 +78,9 @@ export default function Problem() {
           {problems.map((problem, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-              transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.3, delay: 0.2 + index * 0.05 }}
               className="relative"
             >
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-red-500/30 transition-all duration-300">

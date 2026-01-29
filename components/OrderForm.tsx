@@ -80,9 +80,9 @@ export default function OrderForm() {
 
       <div className="section-container relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.3 }}
           className="text-center mb-12"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">

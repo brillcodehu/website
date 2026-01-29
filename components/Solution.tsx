@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const steps = [
@@ -25,24 +25,24 @@ export default function Solution() {
   const ref = useRef(null);
   const containerRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  // Removed scroll-based animation for better performance
+  // const { scrollYProgress } = useScroll({
+  //   target: containerRef,
+  //   offset: ["start end", "end start"],
+  // });
+  // const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
   return (
     <section ref={containerRef} id="hogyan" className="relative py-32 overflow-hidden">
       {/* Gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-cream-100 via-cream-50 to-cream-100" />
 
-      {/* Animated background elements */}
-      <motion.div className="absolute inset-0 pointer-events-none" style={{ y: backgroundY }}>
+      {/* Static background elements - removed animation for performance */}
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-petrol-500/5 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-lime-500/5 rounded-full blur-3xl" />
-      </motion.div>
+      </div>
 
       {/* Grid pattern */}
       <div className="absolute inset-0 opacity-[0.015]" style={{
@@ -54,9 +54,9 @@ export default function Solution() {
         {/* Header */}
         <div className="text-center mb-20">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.3 }}
             className="inline-flex items-center gap-3 mb-6"
           >
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-teal-500/50" />
@@ -67,9 +67,9 @@ export default function Solution() {
           </motion.div>
 
           <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-black text-petrol-900 mb-6 leading-tight"
           >
             Hogyan készül el
@@ -80,9 +80,9 @@ export default function Solution() {
           </motion.h2>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
             className="text-lg text-petrol-600 max-w-2xl mx-auto"
           >
             Nem rohanunk. Rendszerben gondolkodunk. Ezért tudunk gyorsan és minőségben is dolgozni.
@@ -107,9 +107,9 @@ export default function Solution() {
             {steps.map((step, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 60 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
-                transition={{ duration: 0.7, delay: 0.3 + index * 0.2, ease: [0.23, 1, 0.32, 1] }}
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
                 className="relative"
               >
                 {/* Step point on line */}
@@ -143,9 +143,9 @@ export default function Solution() {
 
         {/* Explanation box */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-          transition={{ duration: 0.7, delay: 0.9 }}
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.3, delay: 0.6 }}
           className="max-w-4xl mx-auto mt-20"
         >
           <div className="relative group">

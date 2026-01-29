@@ -12,9 +12,9 @@ export default function RiskReversal() {
     <section ref={ref} className="py-20">
       <div className="section-container">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.3 }}
           className="max-w-3xl mx-auto"
         >
           <div className="bg-gradient-to-br from-teal-50 to-petrol-50 rounded-3xl p-8 md:p-12 border border-teal-200 relative overflow-hidden">

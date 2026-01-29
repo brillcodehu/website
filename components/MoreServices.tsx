@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const services = [
@@ -51,24 +51,19 @@ export default function MoreServices() {
   const ref = useRef(null);
   const containerRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  // Removed scroll-based animation for better performance
 
   return (
     <section ref={containerRef} className="relative py-24 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-petrol-900 via-petrol-800 to-petrol-900" />
 
-      {/* Animated background elements */}
-      <motion.div className="absolute inset-0 pointer-events-none" style={{ y: backgroundY }}>
+      {/* Static background elements - removed animation for performance */}
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-80 h-80 bg-lime-500/10 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-petrol-500/5 rounded-full blur-3xl" />
-      </motion.div>
+      </div>
 
       {/* Grid pattern */}
       <div className="absolute inset-0 opacity-[0.02]" style={{
@@ -80,9 +75,9 @@ export default function MoreServices() {
         {/* Header */}
         <div className="text-center mb-16">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.3 }}
             className="inline-flex items-center gap-3 mb-6"
           >
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-teal-500/50" />
@@ -93,9 +88,9 @@ export default function MoreServices() {
           </motion.div>
 
           <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight"
           >
             Mihez értünk
@@ -106,9 +101,9 @@ export default function MoreServices() {
           </motion.h2>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
             className="text-lg text-petrol-300 max-w-2xl mx-auto"
           >
             Ez csak a landing page ajánlatunk volt. Igazából egyedi rendszereket is építünk, webshopokat, teljes üzemeltetést végzünk bármilyen cégnek (rendszergazda szint), marketingben is nagyok vagyunk.
@@ -120,9 +115,9 @@ export default function MoreServices() {
           {services.map((service, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-              transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.3, delay: 0.2 + index * 0.05 }}
               className="relative group"
             >
               {/* Glow effect */}
