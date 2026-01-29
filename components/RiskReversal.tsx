@@ -5,7 +5,7 @@ import { useRef } from "react";
 
 export default function RiskReversal() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-200px", amount: 0.1 });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <section ref={ref} className="py-20">

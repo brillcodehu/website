@@ -24,7 +24,7 @@ const problems = [
 
 export default function Problem() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-200px", amount: 0.1 });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <section className="relative py-32 overflow-hidden bg-gradient-to-b from-petrol-900 via-petrol-800 to-petrol-900">

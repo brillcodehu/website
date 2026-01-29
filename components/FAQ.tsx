@@ -93,7 +93,7 @@ function FAQItem({
 
 export default function FAQ() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-200px", amount: 0.1 });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (

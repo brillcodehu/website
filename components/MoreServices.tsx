@@ -50,7 +50,7 @@ const services = [
 export default function MoreServices() {
   const ref = useRef(null);
   const containerRef = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-200px", amount: 0.1 });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
   // Removed scroll-based animation for better performance
 
   return (

@@ -33,7 +33,7 @@ const extras = [
 export default function Pricing() {
   const ref = useRef(null);
   const containerRef = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-200px", amount: 0.1 });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [isHovered, setIsHovered] = useState(false);
   // Removed scroll-based animation for better performance
   // const { scrollYProgress } = useScroll({

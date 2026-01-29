@@ -5,7 +5,7 @@ import { useRef } from "react";
 
 export default function Garancia() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-200px", amount: 0.1 });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <section className="relative py-32 overflow-hidden bg-gradient-to-b from-lime-50 via-cream-50 to-teal-50">
