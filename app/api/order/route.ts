@@ -148,11 +148,53 @@ export async function POST(request: NextRequest) {
       </html>
     `;
 
+    // 3. Follow-up email: "Beszéljünk a projektről!"
+    const followUpEmailHtml = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8">
+        </head>
+        <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0;">
+          <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+            <div style="background: linear-gradient(135deg, #1e5f74 0%, #14b886 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+              <h1 style="margin: 0; font-size: 24px;">Beszéljünk a projektről! 💬</h1>
+            </div>
+            <div style="background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px;">
+              <p>Kedves <strong>${name}</strong>!</p>
+
+              <p>Köszönjük a megrendelésedet! Ahhoz, hogy a lehető legjobb landing oldalt készítsük el neked, szeretnénk kicsit jobban megismerni a projektedet.</p>
+
+              <p>Összeállítottunk egy rövid kérdőívet, amivel pontosíthatod az elképzeléseidet – legyen szó a dizájnról, a tartalomról vagy a technikai részletekről.</p>
+
+              <div style="text-align: center; margin: 30px 0;">
+                <a href="https://brillcode.hu/letstalk" style="display: inline-block; background: linear-gradient(135deg, #14b886 0%, #a3e635 100%); color: #1e5f74; font-weight: bold; padding: 16px 40px; border-radius: 12px; text-decoration: none; font-size: 16px;">
+                  Kérdőív kitöltése
+                </a>
+              </div>
+
+              <p style="color: #666; font-size: 14px;">A kérdőív kitöltése nem kötelező, de sokat segít nekünk abban, hogy az oldalad pontosan olyan legyen, amilyennek elképzelted.</p>
+
+              <p style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #eee;">
+                Ha bármi kérdésed van, írj nekünk: <a href="mailto:talk@brillcode.hu" style="color: #14b886;">talk@brillcode.hu</a><br>
+                Vagy hívj: <a href="tel:+36301794259" style="color: #14b886;">+36 30 179 4259</a>
+              </p>
+
+              <p style="margin-top: 20px; color: #666; font-size: 14px;">
+                Üdvözlettel,<br>
+                <strong>BrillCode – Tamás</strong>
+              </p>
+            </div>
+          </div>
+        </body>
+      </html>
+    `;
+
     // Email küldése
     const fromEmail = process.env.FROM_EMAIL || 'BrillCode <onboarding@resend.dev>';
     const adminEmail = process.env.ADMIN_EMAIL || 'talk@brillcode.hu';
 
-    const [adminResult, customerResult] = await Promise.all([
+    const [adminResult, customerResult, followUpResult] = await Promise.all([
       // Admin email
       resend.emails.send({
         from: fromEmail,
@@ -167,10 +209,21 @@ export async function POST(request: NextRequest) {
         subject: 'Köszönjük a megrendelésedet! - BrillCode',
         html: customerEmailHtml,
       }),
+      // Follow-up email
+      resend.emails.send({
+        from: fromEmail,
+        to: email,
+        subject: 'Beszéljünk a projektről! - BrillCode',
+        html: followUpEmailHtml,
+      }),
     ]);
 
-    if (adminResult.error || customerResult.error) {
-      console.error('Email error:', adminResult.error || customerResult.error);
+    if (adminResult.error || customerResult.error || followUpResult.error) {
+      console.error('Email error:', {
+        admin: adminResult.error,
+        customer: customerResult.error,
+        followUp: followUpResult.error,
+      });
       return NextResponse.json(
         { error: 'Hiba történt az email küldése során' },
         { status: 500 }
