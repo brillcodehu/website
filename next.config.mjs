@@ -37,11 +37,6 @@ const nextConfig = {
   
   // Production optimalizálások
   swcMinify: true,
-  
-  // Experimental features a teljesítményhez
-  experimental: {
-    optimizeCss: true,
-  },
 };
 
 export default nextConfig;
