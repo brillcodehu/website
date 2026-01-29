@@ -102,7 +102,7 @@ function FAQItem({
 
 export default function FAQ() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-200px", amount: 0.1 });
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
@@ -111,7 +111,7 @@ export default function FAQ() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
           className="text-center mb-12"
         >
           <span className="section-badge mb-4">GYIK</span>

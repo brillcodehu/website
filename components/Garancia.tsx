@@ -5,7 +5,7 @@ import { useRef } from "react";
 
 export default function Garancia() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-200px", amount: 0.1 });
 
   return (
     <section className="relative py-32 overflow-hidden bg-gradient-to-b from-lime-50 via-cream-50 to-teal-50">
@@ -23,7 +23,7 @@ export default function Garancia() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
             className="mb-8"
           >
             <span className="text-lime-600 text-sm font-semibold tracking-widest uppercase">

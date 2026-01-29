@@ -24,7 +24,7 @@ const problems = [
 
 export default function Problem() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-200px", amount: 0.1 });
 
   return (
     <section className="relative py-32 overflow-hidden bg-gradient-to-b from-petrol-900 via-petrol-800 to-petrol-900">
@@ -80,8 +80,8 @@ export default function Problem() {
               key={index}
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.3, delay: 0.2 + index * 0.05 }}
-              className="relative"
+              transition={{ duration: 0.2, delay: 0.1 + index * 0.03, ease: "easeOut" }}
+              className="relative motion-div"
             >
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-red-500/30 transition-all duration-300">
                 {/* Number */}

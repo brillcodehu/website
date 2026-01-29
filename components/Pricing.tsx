@@ -33,7 +33,7 @@ const extras = [
 export default function Pricing() {
   const ref = useRef(null);
   const containerRef = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-200px", amount: 0.1 });
   const [isHovered, setIsHovered] = useState(false);
   // Removed scroll-based animation for better performance
   // const { scrollYProgress } = useScroll({
@@ -70,7 +70,7 @@ export default function Pricing() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
             className="inline-flex items-center gap-3 mb-6"
           >
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-lime-500/50" />
@@ -158,7 +158,7 @@ export default function Pricing() {
                         <motion.div
                           className="flex items-end justify-center gap-1 sm:gap-2"
                           animate={{ scale: isHovered ? 1.05 : 1 }}
-                          transition={{ duration: 0.3 }}
+                          transition={{ duration: 0.2, ease: "easeOut" }}
                         >
                           <span className="text-5xl sm:text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-petrol-800 to-petrol-600">
                             9 400

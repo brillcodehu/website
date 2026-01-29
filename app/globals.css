@@ -99,12 +99,14 @@ input, textarea, select {
 
 /* Performance optimizations for animations */
 [data-framer-component],
-[data-framer-name] {
-  will-change: transform, opacity;
+[data-framer-name],
+.motion-div {
+  will-change: opacity;
   transform: translateZ(0);
   backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  contain: layout style paint;
 }
 
 /* Reduce motion for users who prefer it */

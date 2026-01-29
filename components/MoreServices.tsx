@@ -50,7 +50,7 @@ const services = [
 export default function MoreServices() {
   const ref = useRef(null);
   const containerRef = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-200px", amount: 0.1 });
   // Removed scroll-based animation for better performance
 
   return (
@@ -77,7 +77,7 @@ export default function MoreServices() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
             className="inline-flex items-center gap-3 mb-6"
           >
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-teal-500/50" />
@@ -134,7 +134,7 @@ export default function MoreServices() {
                   <motion.div
                     className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg`}
                     whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
                   >
                     {service.icon}
                   </motion.div>
