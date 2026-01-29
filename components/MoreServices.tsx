@@ -102,12 +102,12 @@ export default function MoreServices() {
               key={index}
               className={`relative group fade-in-scale fade-in-stagger-${Math.min(index, 4)} ${isInView ? 'visible' : ''}`}
             >
-              {/* Enhanced glow effect - smooth with scale */}
-              <div className={`absolute -inset-[2px] bg-gradient-to-r ${service.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-40 scale-95 group-hover:scale-100 transition-all duration-500 ease-out`} />
+              {/* Enhanced glow effect - smooth opacity only */}
+              <div className={`absolute -inset-[2px] bg-gradient-to-r ${service.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-700 ease-in-out`} />
 
               <div className="relative bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-8 h-full overflow-hidden transition-all duration-500 ease-out group-hover:border-white/20 group-hover:scale-[1.02] group-hover:-translate-y-1">
                 {/* Background gradient - smooth transition */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 ease-out`} />
+                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-10 transition-opacity duration-700 ease-in-out`} />
 
                 <div className="relative z-10">
                   {/* Icon with enhanced hover - smooth */}
