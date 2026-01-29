@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { useInView } from "framer-motion";
 import { useRef } from "react";
 
 const problems = [
@@ -39,49 +39,31 @@ export default function Problem() {
       <div ref={ref} className="section-container relative z-10">
         {/* Header */}
         <div className="text-center mb-24">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="mb-8 motion-div"
-          >
+          <div className={`mb-8 fade-in ${isInView ? 'visible' : ''}`}>
             <span className="text-red-400 text-sm font-semibold tracking-widest uppercase">
               A probléma
             </span>
-          </motion.div>
+          </div>
 
-          <motion.h2
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.2, delay: 0.1, ease: "easeOut" }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight motion-div"
-          >
+          <h2 className={`text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight fade-in fade-in-delay-1 ${isInView ? 'visible' : ''}`}>
             Miért nem működnek
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">
               a landing oldalak?
             </span>
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.2, delay: 0.2, ease: "easeOut" }}
-            className="text-xl text-petrol-300 max-w-2xl mx-auto motion-div"
-          >
+          <p className={`text-xl text-petrol-300 max-w-2xl mx-auto fade-in fade-in-delay-2 ${isInView ? 'visible' : ''}`}>
             Láttad már azt az oldalt, ahol minden stimmel, mégsem kattintasz?
-          </motion.p>
+          </p>
         </div>
 
         {/* Problems - clean grid */}
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-16">
           {problems.map((problem, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.2, delay: 0.1 + index * 0.03, ease: "easeOut" }}
-              className="relative motion-div"
+              className={`relative fade-in fade-in-stagger-${index} ${isInView ? 'visible' : ''}`}
             >
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-red-500/30 transition-all duration-300">
                 {/* Number */}
@@ -100,24 +82,19 @@ export default function Problem() {
                   {problem.description}
                 </p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Bottom hint */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="text-center"
-        >
+        <div className={`text-center fade-in fade-in-delay-3 ${isInView ? 'visible' : ''}`}>
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-lime-500/10 border border-lime-500/20">
             <div className="w-2 h-2 rounded-full bg-lime-400" />
             <p className="text-lg text-white font-medium">
               Van egy <span className="text-lime-400 font-bold">jobb megoldás</span>
             </p>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
