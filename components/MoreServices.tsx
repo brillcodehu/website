@@ -100,7 +100,7 @@ export default function MoreServices() {
           {services.map((service, index) => (
             <div
               key={index}
-              className={`relative group fade-in fade-in-stagger-${Math.min(index, 4)} ${isInView ? 'visible' : ''}`}
+              className={`relative group fade-in-scale fade-in-stagger-${Math.min(index, 4)} ${isInView ? 'visible' : ''}`}
             >
               {/* Glow effect */}
               <div className={`absolute -inset-[1px] bg-gradient-to-r ${service.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`} />

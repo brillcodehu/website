@@ -92,7 +92,7 @@ export default function Pricing() {
           <div className="grid lg:grid-cols-5 gap-6 lg:gap-8">
             {/* Main pricing card */}
             <div
-              className={`lg:col-span-3 w-full fade-in fade-in-delay-1 ${isInView ? 'visible' : ''}`}
+              className={`lg:col-span-3 w-full fade-in-scale fade-in-delay-1 ${isInView ? 'visible' : ''}`}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >

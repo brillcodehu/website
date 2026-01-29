@@ -34,14 +34,14 @@ export default function Garancia() {
         </div>
 
         {/* Central statement box */}
-        <div className={`max-w-4xl mx-auto mb-16 fade-in fade-in-delay-2 ${isInView ? 'visible' : ''}`}>
+        <div className={`max-w-4xl mx-auto mb-16 fade-in-scale fade-in-delay-2 ${isInView ? 'visible' : ''}`}>
           <div className="relative">
             {/* Glow effect */}
             <div className="absolute -inset-4 bg-gradient-to-r from-lime-400/20 via-teal-400/20 to-lime-400/20 rounded-3xl blur-2xl" />
 
             <div className="relative bg-white rounded-3xl p-12 md:p-16 border-2 border-lime-200 shadow-2xl">
               {/* Large checkmark icon */}
-              <div className={`w-24 h-24 bg-gradient-to-br from-lime-400 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-lg fade-in fade-in-delay-3 ${isInView ? 'visible' : ''}`}>
+              <div className={`w-24 h-24 bg-gradient-to-br from-lime-400 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-lg fade-in-scale fade-in-delay-3 ${isInView ? 'visible' : ''}`}>
                 <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                 </svg>

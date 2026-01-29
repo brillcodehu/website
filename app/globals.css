@@ -100,14 +100,15 @@ input, textarea, select {
 /* CSS Transitions for animations - MUCH faster than Framer Motion */
 .fade-in {
   opacity: 0;
-  transition: opacity 0.2s ease-out;
-  will-change: opacity;
-  transform: translateZ(0);
+  transform: translateY(20px) translateZ(0) scale(0.98);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  will-change: opacity, transform;
   backface-visibility: hidden;
 }
 
 .fade-in.visible {
   opacity: 1;
+  transform: translateY(0) translateZ(0) scale(1);
 }
 
 .fade-in-delay-1 {
@@ -136,11 +137,40 @@ input, textarea, select {
 
 /* Stagger delays for multiple items */
 .fade-in-stagger-0 { transition-delay: 0.1s; }
-.fade-in-stagger-1 { transition-delay: 0.13s; }
-.fade-in-stagger-2 { transition-delay: 0.16s; }
-.fade-in-stagger-3 { transition-delay: 0.19s; }
-.fade-in-stagger-4 { transition-delay: 0.22s; }
-.fade-in-stagger-5 { transition-delay: 0.25s; }
+.fade-in-stagger-1 { transition-delay: 0.15s; }
+.fade-in-stagger-2 { transition-delay: 0.2s; }
+.fade-in-stagger-3 { transition-delay: 0.25s; }
+.fade-in-stagger-4 { transition-delay: 0.3s; }
+.fade-in-stagger-5 { transition-delay: 0.35s; }
+
+/* Subtle scale animation */
+.fade-in-scale {
+  opacity: 0;
+  transform: scale(0.95) translateZ(0);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+}
+
+.fade-in-scale.visible {
+  opacity: 1;
+  transform: scale(1) translateZ(0);
+}
+
+/* Blur fade-in for special effects */
+.fade-in-blur {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateZ(0);
+  transition: opacity 0.5s ease-out, filter 0.5s ease-out;
+  will-change: opacity, filter;
+  backface-visibility: hidden;
+}
+
+.fade-in-blur.visible {
+  opacity: 1;
+  filter: blur(0);
+}
 
 /* Scale animation for line */
 .scale-x-in {
@@ -156,13 +186,19 @@ input, textarea, select {
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
   .fade-in,
+  .fade-in-scale,
+  .fade-in-blur,
   .scale-x-in {
     transition-duration: 0.01ms !important;
     transition-delay: 0ms !important;
   }
   
-  .fade-in.visible {
+  .fade-in.visible,
+  .fade-in-scale.visible,
+  .fade-in-blur.visible {
     opacity: 1 !important;
+    transform: translateY(0) translateZ(0) scale(1) !important;
+    filter: blur(0) !important;
   }
   
   .scale-x-in.visible {

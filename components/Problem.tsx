@@ -63,7 +63,7 @@ export default function Problem() {
           {problems.map((problem, index) => (
             <div
               key={index}
-              className={`relative fade-in fade-in-stagger-${index} ${isInView ? 'visible' : ''}`}
+              className={`relative fade-in-scale fade-in-stagger-${index} ${isInView ? 'visible' : ''}`}
             >
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-red-500/30 transition-all duration-300">
                 {/* Number */}
