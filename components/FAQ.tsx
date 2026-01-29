@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
 
@@ -83,19 +82,11 @@ function FAQItem({
           </svg>
         </span>
       </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden"
-          >
-            <p className="pb-5 text-petrol-600 leading-relaxed">{faq.answer}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isOpen && (
+        <div className="overflow-hidden transition-all duration-200">
+          <p className="pb-5 text-petrol-600 leading-relaxed">{faq.answer}</p>
+        </div>
+      )}
     </div>
   );
 }
@@ -108,12 +99,7 @@ export default function FAQ() {
   return (
     <section ref={ref} id="gyik" className="py-20 bg-cream-50">
       <div className="section-container">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-          className="text-center mb-12"
-        >
+        <div className={`text-center mb-12 fade-in ${isInView ? 'visible' : ''}`}>
           <span className="section-badge mb-4">GYIK</span>
           <h2 className="text-3xl sm:text-4xl font-bold text-petrol-800 mb-4">
             Gyakran ismételt kérdések
@@ -121,14 +107,9 @@ export default function FAQ() {
           <p className="text-lg text-petrol-600 max-w-2xl mx-auto">
             Ha itt nem találod a választ, írj nekünk – szívesen segítünk.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="max-w-3xl mx-auto"
-        >
+        <div className={`max-w-3xl mx-auto fade-in fade-in-delay-1 ${isInView ? 'visible' : ''}`}>
           <div className="bg-white rounded-2xl shadow-sm border border-petrol-100 px-6 md:px-8">
             {faqs.map((faq, index) => (
               <FAQItem
@@ -139,15 +120,10 @@ export default function FAQ() {
               />
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Contact prompt */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-center mt-10"
-        >
+        <div className={`text-center mt-10 fade-in fade-in-delay-2 ${isInView ? 'visible' : ''}`}>
           <p className="text-petrol-600">
             Még mindig van kérdésed?{" "}
             <a
@@ -164,7 +140,7 @@ export default function FAQ() {
               +36 30 179 4259
             </a>
           </p>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

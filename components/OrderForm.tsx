@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
 
@@ -79,12 +78,7 @@ export default function OrderForm() {
       </div>
 
       <div className="section-container relative z-10">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-          className="text-center mb-12"
-        >
+        <div className={`text-center mb-12 fade-in ${isInView ? 'visible' : ''}`}>
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             Jöhet a sajátod?
           </h2>
@@ -93,22 +87,11 @@ export default function OrderForm() {
             <br />
             <span className="text-lime-400 font-semibold">9 400 Ft</span> – egyszeri díj, nincs rejtett költség.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="max-w-2xl mx-auto"
-        >
-          <AnimatePresence mode="wait">
-            {isSubmitted ? (
-              <motion.div
-                key="success"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="bg-white rounded-2xl p-8 md:p-12 text-center"
-              >
+        <div className={`max-w-2xl mx-auto fade-in fade-in-delay-1 ${isInView ? 'visible' : ''}`}>
+          {isSubmitted ? (
+            <div className="bg-white rounded-2xl p-8 md:p-12 text-center">
                 <div className="w-20 h-20 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   <svg
                     className="w-10 h-10 text-teal-500"
@@ -142,13 +125,12 @@ export default function OrderForm() {
                     3. E-mailben küldjük a linket és a fizetési infót
                   </p>
                 </div>
-              </motion.div>
-            ) : (
-              <motion.form
-                key="form"
-                onSubmit={handleSubmit}
-                className="bg-white rounded-2xl p-8 md:p-10 shadow-2xl"
-              >
+            </div>
+          ) : (
+            <form
+              onSubmit={handleSubmit}
+              className="bg-white rounded-2xl p-8 md:p-10 shadow-2xl"
+            >
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Name */}
                   <div>
@@ -366,10 +348,9 @@ export default function OrderForm() {
                     24 órán belül kész
                   </div>
                 </div>
-              </motion.form>
-            )}
-          </AnimatePresence>
-        </motion.div>
+            </form>
+          )}
+        </div>
       </div>
     </section>
   );

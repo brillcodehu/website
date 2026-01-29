@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 
@@ -11,12 +10,7 @@ export default function RiskReversal() {
   return (
     <section ref={ref} className="py-20">
       <div className="section-container">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-          className="max-w-3xl mx-auto"
-        >
+        <div className={`max-w-3xl mx-auto fade-in ${isInView ? 'visible' : ''}`}>
           <div className="bg-gradient-to-br from-teal-50 to-petrol-50 rounded-3xl p-8 md:p-12 border border-teal-200 relative overflow-hidden">
             {/* Decorative elements */}
             <div className="absolute top-0 right-0 w-40 h-40 bg-teal-500/10 rounded-full blur-3xl" />
@@ -161,7 +155,7 @@ export default function RiskReversal() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

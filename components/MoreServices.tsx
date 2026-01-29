@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { useInView } from "framer-motion";
 import { useRef } from "react";
 
 const services = [
@@ -74,56 +74,36 @@ export default function MoreServices() {
       <div ref={ref} className="section-container relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="inline-flex items-center gap-3 mb-6"
-          >
+          <div className={`inline-flex items-center gap-3 mb-6 fade-in ${isInView ? 'visible' : ''}`}>
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-teal-500/50" />
             <span className="text-teal-400/80 text-sm font-medium tracking-widest uppercase">
               További szolgáltatások
             </span>
             <div className="h-px w-12 bg-gradient-to-l from-transparent to-teal-500/50" />
-          </motion.div>
+          </div>
 
-          <motion.h2
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.3, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight"
-          >
+          <h2 className={`text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight fade-in fade-in-delay-1 ${isInView ? 'visible' : ''}`}>
             Mihez értünk
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-lime-400 to-teal-400">
               még?
             </span>
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.3, delay: 0.2 }}
-            className="text-lg text-petrol-300 max-w-2xl mx-auto"
-          >
+          <p className={`text-lg text-petrol-300 max-w-2xl mx-auto fade-in fade-in-delay-2 ${isInView ? 'visible' : ''}`}>
             Ez csak a landing page ajánlatunk volt. Igazából egyedi rendszereket is építünk, webshopokat, teljes üzemeltetést végzünk bármilyen cégnek (rendszergazda szint), marketingben is nagyok vagyunk.
-          </motion.p>
+          </p>
         </div>
 
         {/* Services grid */}
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-12">
           {services.map((service, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.3, delay: 0.2 + index * 0.05 }}
-              className="relative group"
+              className={`relative group fade-in fade-in-stagger-${Math.min(index, 4)} ${isInView ? 'visible' : ''}`}
             >
               {/* Glow effect */}
-              <motion.div
-                className={`absolute -inset-[1px] bg-gradient-to-r ${service.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
-              />
+              <div className={`absolute -inset-[1px] bg-gradient-to-r ${service.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`} />
 
               <div className="relative bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-8 h-full overflow-hidden">
                 {/* Background gradient */}
@@ -131,13 +111,9 @@ export default function MoreServices() {
 
                 <div className="relative z-10">
                   {/* Icon */}
-                  <motion.div
-                    className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg`}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                  >
+                  <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg transition-transform duration-200 hover:scale-110 hover:rotate-3`}>
                     {service.icon}
-                  </motion.div>
+                  </div>
 
                   {/* Title */}
                   <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-teal-100 transition-colors">
@@ -157,17 +133,12 @@ export default function MoreServices() {
                   <div className="absolute bottom-10 right-4 w-1.5 h-1.5 rounded-full bg-lime-400/20" />
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.3, delay: 0.5 }}
-          className="text-center"
-        >
+        <div className={`text-center fade-in fade-in-delay-4 ${isInView ? 'visible' : ''}`}>
           <div className="inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-teal-500/10 via-lime-500/10 to-teal-500/10 border border-teal-500/20 rounded-2xl backdrop-blur-sm">
             <svg className="w-6 h-6 text-lime-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -177,7 +148,7 @@ export default function MoreServices() {
               <p className="text-petrol-300 text-sm">Írj nekünk vagy hívj: <a href="tel:+36301794259" className="text-lime-400 hover:text-lime-300 font-semibold">+36 30 179 4259</a></p>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
