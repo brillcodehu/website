@@ -53,7 +53,12 @@ export default function OrderForm() {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      let data: { error?: string; message?: string } = {};
+      try {
+        data = await response.json();
+      } catch {
+        data = { error: 'A szerver nem adott érvényes választ.' };
+      }
 
       if (!response.ok) {
         throw new Error(data.error || 'Hiba történt a küldés során');
@@ -65,7 +70,8 @@ export default function OrderForm() {
       if (w?.fbq) w.fbq("track", "Purchase", { value: 9400, currency: "HUF" });
     } catch (error) {
       console.error('Form submission error:', error);
-      alert('Hiba történt a megrendelés küldése során. Kérlek próbáld újra vagy írj nekünk: talk@brillcode.hu');
+      const msg = error instanceof Error ? error.message : 'Hiba történt a megrendelés küldése során.';
+      alert(`${msg} Kérlek próbáld újra vagy írj nekünk: talk@brillcode.hu`);
     } finally {
       setIsSubmitting(false);
     }

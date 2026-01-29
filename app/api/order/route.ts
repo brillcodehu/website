@@ -1,21 +1,45 @@
 import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
 
+function escapeHtml(s: string): string {
+  if (!s) return '';
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.json();
     const { name, email, phone, business, goal, hasWebsite, notes } = formData;
 
-    // Resend inicializálása a függvényen belül
     const resend = new Resend(process.env.RESEND_API_KEY);
+    if (!process.env.RESEND_API_KEY) {
+      return NextResponse.json(
+        { error: 'Email szolgáltatás nincs konfigurálva' },
+        { status: 500 }
+      );
+    }
 
     // Validáció
     if (!name || !email || !business || !goal) {
       return NextResponse.json(
-        { error: 'Hiányzó kötelező mezők' },
+        { error: 'Hiányzó kötelező mezők (név, email, cégnév, cél)' },
         { status: 400 }
       );
     }
+
+    const safe = {
+      name: escapeHtml(name),
+      email: escapeHtml(email),
+      phone: escapeHtml(phone || ''),
+      business: escapeHtml(business),
+      goal: escapeHtml(goal),
+      hasWebsite: escapeHtml(hasWebsite || ''),
+      notes: escapeHtml(notes || ''),
+    };
 
     // 1. Email neked (admin/ügyfél)
     const adminEmailHtml = `
@@ -45,31 +69,31 @@ export async function POST(request: NextRequest) {
               <div class="highlight">
                 <div class="field">
                   <span class="label">Név:</span>
-                  <span class="value">${name || '–'}</span>
+                  <span class="value">${safe.name || '–'}</span>
                 </div>
                 <div class="field">
                   <span class="label">Email:</span>
-                  <span class="value">${email || '–'}</span>
+                  <span class="value">${safe.email || '–'}</span>
                 </div>
                 <div class="field">
                   <span class="label">Telefonszám:</span>
-                  <span class="value">${phone ? phone : '–'}</span>
+                  <span class="value">${safe.phone || '–'}</span>
                 </div>
                 <div class="field">
                   <span class="label">Cégnév / Márkanév:</span>
-                  <span class="value">${business || '–'}</span>
+                  <span class="value">${safe.business || '–'}</span>
                 </div>
                 <div class="field">
                   <span class="label">Mi a cél?:</span>
-                  <span class="value">${goal || '–'}</span>
+                  <span class="value">${safe.goal || '–'}</span>
                 </div>
                 <div class="field">
                   <span class="label">Van már weboldalad?:</span>
-                  <span class="value">${hasWebsite ? hasWebsite : '–'}</span>
+                  <span class="value">${safe.hasWebsite || '–'}</span>
                 </div>
                 <div class="field">
                   <span class="label">Bármi amit még tudnunk kell:</span>
-                  <span class="value">${notes ? notes.replace(/\n/g, '<br>') : '–'}</span>
+                  <span class="value">${safe.notes ? safe.notes.replace(/\n/g, '<br>') : '–'}</span>
                 </div>
               </div>
 
@@ -109,14 +133,14 @@ export async function POST(request: NextRequest) {
               <h1>Köszönjük a megrendelést! 🎉</h1>
             </div>
             <div class="content">
-              <p>Kedves <strong>${name}</strong>!</p>
+              <p>Kedves <strong>${safe.name}</strong>!</p>
               
               <p>Megkaptuk a megrendelésedet. Hamarosan felvesszük veled a kapcsolatot, és <strong>24 órán belül</strong> elkészül a landing oldalad.</p>
 
               <div class="highlight">
                 <h3 style="margin-top: 0; color: #1e5f74;">Megrendelés részletei:</h3>
-                <p><strong>Cégnév:</strong> ${business}</p>
-                <p><strong>Cél:</strong> ${goal}</p>
+                <p><strong>Cégnév:</strong> ${safe.business}</p>
+                <p><strong>Cél:</strong> ${safe.goal}</p>
                 <p><strong>Ár:</strong> 9 400 Ft (egyszeri díj)</p>
               </div>
 
@@ -155,7 +179,7 @@ export async function POST(request: NextRequest) {
               <h1 style="margin: 0; font-size: 24px;">Beszéljünk a projektről! 💬</h1>
             </div>
             <div style="background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px;">
-              <p>Kedves <strong>${name}</strong>!</p>
+              <p>Kedves <strong>${safe.name}</strong>!</p>
 
               <p>Köszönjük a megrendelésedet! Ahhoz, hogy a lehető legjobb landing oldalt készítsük el neked, szeretnénk kicsit jobban megismerni a projektedet.</p>
 
@@ -184,27 +208,33 @@ export async function POST(request: NextRequest) {
       </html>
     `;
 
-    // Email küldése: admin értesítés boss@-ról, ügyfélnek szólók talk@-ról
     const fromEmail = process.env.FROM_EMAIL || 'BrillCode <talk@brillcode.hu>';
     const adminFromEmail = process.env.ADMIN_FROM_EMAIL || 'BrillCode <boss@brillcode.hu>';
-    const adminEmail = process.env.ADMIN_EMAIL || 'talk@brillcode.hu';
+    const adminTo = process.env.ADMIN_EMAIL || 'talk@brillcode.hu';
 
-    const [adminResult, customerResult, followUpResult] = await Promise.all([
-      // Admin email – csak ez megy boss@-ról
-      resend.emails.send({
-        from: adminFromEmail,
-        to: adminEmail,
-        subject: `Új megrendelés: ${business} - ${name}`,
+    // Admin email: először boss@-ról, ha Resend hibát ad (pl. nincs verified), talk@-ról
+    let adminResult = await resend.emails.send({
+      from: adminFromEmail,
+      to: adminTo,
+      subject: `Új megrendelés: ${safe.business} - ${safe.name}`,
+      html: adminEmailHtml,
+    });
+    if (adminResult.error) {
+      adminResult = await resend.emails.send({
+        from: fromEmail,
+        to: adminTo,
+        subject: `Új megrendelés: ${safe.business} - ${safe.name}`,
         html: adminEmailHtml,
-      }),
-      // Visszaigazoló email
+      });
+    }
+
+    const [customerResult, followUpResult] = await Promise.all([
       resend.emails.send({
         from: fromEmail,
         to: email,
         subject: 'Köszönjük a megrendelésedet! - BrillCode',
         html: customerEmailHtml,
       }),
-      // Follow-up email
       resend.emails.send({
         from: fromEmail,
         to: email,
