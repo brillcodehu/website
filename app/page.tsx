@@ -1,15 +1,18 @@
+import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
-import Problem from "@/components/Problem";
-import Solution from "@/components/Solution";
-import Garancia from "@/components/Garancia";
-import Pricing from "@/components/Pricing";
-import RiskReversal from "@/components/RiskReversal";
-import FAQ from "@/components/FAQ";
-import MoreServices from "@/components/MoreServices";
-import OrderForm from "@/components/OrderForm";
 import StickyHeader from "@/components/StickyHeader";
 import MobileBottomCTA from "@/components/MobileBottomCTA";
 import Footer from "@/components/Footer";
+
+// Lazy load components below the fold
+const Problem = dynamic(() => import("@/components/Problem"), { ssr: true });
+const Solution = dynamic(() => import("@/components/Solution"), { ssr: true });
+const Garancia = dynamic(() => import("@/components/Garancia"), { ssr: true });
+const Pricing = dynamic(() => import("@/components/Pricing"), { ssr: true });
+const RiskReversal = dynamic(() => import("@/components/RiskReversal"), { ssr: true });
+const FAQ = dynamic(() => import("@/components/FAQ"), { ssr: true });
+const MoreServices = dynamic(() => import("@/components/MoreServices"), { ssr: true });
+const OrderForm = dynamic(() => import("@/components/OrderForm"), { ssr: true });
 
 export default function Home() {
   return (
