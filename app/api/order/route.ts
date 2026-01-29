@@ -228,31 +228,63 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    const [customerResult, followUpResult] = await Promise.all([
-      resend.emails.send({
-        from: fromEmail,
-        to: email,
-        subject: 'Köszönjük a megrendelésedet! - BrillCode',
-        html: customerEmailHtml,
-      }),
-      resend.emails.send({
-        from: fromEmail,
-        to: email,
-        subject: 'Beszéljünk a projektről! - BrillCode',
-        html: followUpEmailHtml,
-      }),
-    ]);
+    // Ügyfélnek: először visszaigazoló, majd follow-up (sorban, ugyanarra a címre – párhuzamos küldés sokszor elutasítja a második)
+    const customerResult = await resend.emails.send({
+      from: fromEmail,
+      to: email,
+      subject: 'Köszönjük a megrendelésedet! - BrillCode',
+      html: customerEmailHtml,
+    });
 
-    if (adminResult.error || customerResult.error || followUpResult.error) {
-      console.error('Email error:', {
-        admin: adminResult.error,
-        customer: customerResult.error,
-        followUp: followUpResult.error,
-      });
+    if (customerResult.error) {
+      console.error('Email error (customer):', customerResult.error);
       return NextResponse.json(
         { error: 'Hiba történt az email küldése során' },
         { status: 500 }
       );
+    }
+
+    await new Promise((r) => setTimeout(r, 500));
+
+    let followUpResult = await resend.emails.send({
+      from: fromEmail,
+      to: email,
+      subject: 'Beszéljünk a projektről! - BrillCode',
+      html: followUpEmailHtml,
+    });
+
+    if (followUpResult.error) {
+      await new Promise((r) => setTimeout(r, 1000));
+      followUpResult = await resend.emails.send({
+        from: fromEmail,
+        to: email,
+        subject: 'Beszéljünk a projektről! - BrillCode',
+        html: followUpEmailHtml,
+      });
+    }
+    if (followUpResult.error) {
+      await new Promise((r) => setTimeout(r, 2000));
+      followUpResult = await resend.emails.send({
+        from: fromEmail,
+        to: email,
+        subject: 'Beszéljünk a projektről! - BrillCode',
+        html: followUpEmailHtml,
+      });
+    }
+
+    if (adminResult.error) {
+      console.error('Email error (admin):', adminResult.error);
+      return NextResponse.json(
+        { error: 'Hiba történt az email küldése során' },
+        { status: 500 }
+      );
+    }
+
+    if (followUpResult.error) {
+      console.error('Follow-up email failed after retries:', {
+        to: email,
+        error: followUpResult.error,
+      });
     }
 
     return NextResponse.json(
