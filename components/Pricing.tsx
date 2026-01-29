@@ -239,12 +239,7 @@ export default function Pricing() {
                     ))}
                   </ul>
 
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                    transition={{ delay: 1 }}
-                    className="mt-6 sm:mt-8 p-4 sm:p-5 bg-gradient-to-br from-petrol-50 to-teal-50 rounded-2xl border border-petrol-100"
-                  >
+                  <div className={`mt-6 sm:mt-8 p-4 sm:p-5 bg-gradient-to-br from-petrol-50 to-teal-50 rounded-2xl border border-petrol-100 fade-in fade-in-delay-5 ${isInView ? 'visible' : ''}`}>
                     <div className="flex gap-2 sm:gap-3">
                       <div className="w-7 h-7 sm:w-8 sm:h-8 bg-petrol-600 rounded-lg flex items-center justify-center flex-shrink-0">
                         <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
