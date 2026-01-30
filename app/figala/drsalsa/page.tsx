@@ -664,10 +664,10 @@ export default function DrSalsaPage() {
         </section>
 
         {/* ─── DANCE STYLES ─── */}
-        <section ref={stylesR.ref} className="ds-section-bg" style={{padding:"120px 24px",maxWidth:1200,margin:"0 auto"}}>
+        <section ref={stylesR.ref} className="ds-section-bg" style={{padding:"120px 24px"}}>
           <div className="ds-bg-image" style={{backgroundImage:"url(/figala/drsalsa/img/8J5A0039.JPG)"}} />
           <div className="ds-bg-overlay" style={{background:"linear-gradient(180deg, rgba(245,242,237,0.82) 0%, rgba(245,242,237,0.94) 100%)"}} />
-          <div className="ds-bg-content">
+          <div className="ds-bg-content" style={{maxWidth:1200,margin:"0 auto"}}>
           <p style={{
             ...fade(stylesR.visible,0),
             textAlign:"center",fontSize:13,fontWeight:700,
@@ -757,10 +757,10 @@ export default function DrSalsaPage() {
         </section>
 
         {/* ─── PROBLEM ─── */}
-        <section ref={problemR.ref} className="ds-section-bg" style={{padding:"100px 24px",maxWidth:800,margin:"0 auto"}}>
+        <section ref={problemR.ref} className="ds-section-bg" style={{padding:"100px 24px"}}>
           <div className="ds-bg-image" style={{backgroundImage:"url(/figala/drsalsa/img/8J5A0076.JPG)"}} />
           <div className="ds-bg-overlay" style={{background:"rgba(245,242,237,0.88)"}} />
-          <div className="ds-bg-content">
+          <div className="ds-bg-content" style={{maxWidth:800,margin:"0 auto"}}>
           <h2 style={{
             ...fade(problemR.visible,0),
             fontSize:"clamp(32px,5vw,48px)",fontWeight:900,
@@ -807,10 +807,10 @@ export default function DrSalsaPage() {
         </section>
 
         {/* ─── STATS ─── */}
-        <section ref={statsR.ref} className="ds-section-bg" style={{padding:"80px 24px",maxWidth:1100,margin:"0 auto"}}>
+        <section ref={statsR.ref} className="ds-section-bg" style={{padding:"80px 24px"}}>
           <div className="ds-bg-image" style={{backgroundImage:"url(/figala/drsalsa/img/8J5A0135.JPG)"}} />
           <div className="ds-bg-overlay" style={{background:"linear-gradient(180deg, rgba(245,242,237,0.8) 0%, rgba(245,242,237,0.92) 100%)"}} />
-          <div className="ds-bg-content">
+          <div className="ds-bg-content" style={{maxWidth:1100,margin:"0 auto"}}>
           <div style={{
             display:"grid",
             gridTemplateColumns:"repeat(auto-fit, minmax(200px, 1fr))",
@@ -844,10 +844,10 @@ export default function DrSalsaPage() {
         </section>
 
         {/* ─── BENEFITS ─── */}
-        <section ref={benefitsR.ref} className="ds-section-bg" style={{padding:"100px 24px",maxWidth:900,margin:"0 auto"}}>
+        <section ref={benefitsR.ref} className="ds-section-bg" style={{padding:"100px 24px"}}>
           <div className="ds-bg-image" style={{backgroundImage:"url(/figala/drsalsa/img/8J5A0076.JPG)"}} />
           <div className="ds-bg-overlay" style={{background:"rgba(245,242,237,0.85)"}} />
-          <div className="ds-bg-content">
+          <div className="ds-bg-content" style={{maxWidth:900,margin:"0 auto"}}>
           <p style={{
             ...fade(benefitsR.visible,0),
             textAlign:"center",fontSize:13,fontWeight:700,
@@ -980,10 +980,10 @@ export default function DrSalsaPage() {
         </section>
 
         {/* ─── FAQ ─── */}
-        <section ref={faqR.ref} className="ds-section-bg" style={{padding:"100px 24px",maxWidth:700,margin:"0 auto"}}>
+        <section ref={faqR.ref} className="ds-section-bg" style={{padding:"100px 24px"}}>
           <div className="ds-bg-image" style={{backgroundImage:"url(/figala/drsalsa/img/8J5A0039.JPG)"}} />
           <div className="ds-bg-overlay" style={{background:"rgba(245,242,237,0.88)"}} />
-          <div className="ds-bg-content">
+          <div className="ds-bg-content" style={{maxWidth:700,margin:"0 auto"}}>
           <h2 style={{
             ...fade(faqR.visible,0),
             fontSize:"clamp(28px,4vw,40px)",fontWeight:900,
