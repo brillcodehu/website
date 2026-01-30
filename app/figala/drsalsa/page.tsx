@@ -75,23 +75,23 @@ const t = {
       items: [
         {
           title: "Párban oktatunk",
-          text: "Két oktató — egyikük vezet, másikuk követ. Mindkét fél kap figyelmet.",
-          size: "large",
+          text: "Két oktató — egyikük vezet, másikuk követ. Mindkét fél kap valódi figyelmet, nem csak az egyik.",
         },
         {
           title: "Valódi táncterem",
-          text: "Profi tánctér, tükrök, hangrendszer. Nem pince, nem tornaterem.",
-          size: "small",
+          text: "Profi tánctér, tükrök, hangrendszer. Nem pince, nem tornaterem — hanem egy hely, ahol jó lenni.",
         },
         {
           title: "Heti bulik",
-          text: "Amit tanulsz, rögtön gyakorlod. Social dance estek minden héten.",
-          size: "small",
+          text: "Amit tanulsz, rögtön gyakorlod. Social dance estek minden héten, ahol a tánc élesben működik.",
+        },
+        {
+          title: "10+ év tapasztalat",
+          text: "Több ezer táncos indult el nálunk a nulláról. Tudjuk, mi működik kezdőknek — és mi nem.",
         },
         {
           title: "100% garancia",
-          text: "Ha az első óra után nem tetszett? Visszaadjuk az árát. Kérdés nélkül.",
-          size: "large",
+          text: "Ha az első óra után nem tetszett? Visszaadjuk az árát. Kérdés nélkül. Zero kockázat.",
         },
       ],
     },
@@ -201,23 +201,23 @@ const t = {
       items: [
         {
           title: "Pair teaching",
-          text: "Two instructors — one leads, one follows. Both sides get real attention.",
-          size: "large",
+          text: "Two instructors — one leads, one follows. Both sides get real attention, not just one.",
         },
         {
           title: "Real dance studio",
-          text: "Professional dance floor, mirrors, sound system. Not a basement.",
-          size: "small",
+          text: "Professional dance floor, mirrors, sound system. Not a basement — a place you actually want to be.",
         },
         {
           title: "Weekly socials",
-          text: "Practice what you learn. Social dance nights every single week.",
-          size: "small",
+          text: "Practice what you learn. Social dance nights every single week, where dance becomes real.",
+        },
+        {
+          title: "10+ years of experience",
+          text: "Thousands of dancers started from zero with us. We know what works for beginners — and what doesn't.",
         },
         {
           title: "100% guarantee",
-          text: "If you didn't enjoy the first class? Full refund. No questions asked.",
-          size: "large",
+          text: "If you didn't enjoy the first class? Full refund. No questions asked. Zero risk.",
         },
       ],
     },
@@ -473,10 +473,22 @@ export default function DrSalsaPage() {
           transform:translateY(-8px);
         }
 
+        /* Benefit row hover */
+        .ds-benefit-row:hover .ds-benefit-glow{opacity:1 !important}
+        .ds-benefit-row:hover h3{
+          background:linear-gradient(135deg,#E85D4A,#FF8A6B,#D4A547);
+          background-size:200% 200%;
+          -webkit-background-clip:text;
+          -webkit-text-fill-color:transparent;
+          background-clip:text;
+          animation:ds-gradient 4s ease infinite;
+        }
+
         @media(max-width:768px){
           .ds-cta{padding:16px 32px;font-size:15px}
           .ds-faq-btn{font-size:16px;padding:22px 0}
           .ds-dance-card{padding:32px 24px}
+          .ds-benefit-row{grid-template-columns:56px 1fr !important;padding:36px 0 !important}
         }
       `}</style>
 
@@ -807,42 +819,71 @@ export default function DrSalsaPage() {
           </div>
         </section>
 
-        {/* ─── BENEFITS (BENTO) ─── */}
-        <section ref={benefitsR.ref} style={{padding:"100px 24px",maxWidth:1000,margin:"0 auto"}}>
+        {/* ─── BENEFITS ─── */}
+        <section ref={benefitsR.ref} style={{padding:"100px 24px",maxWidth:900,margin:"0 auto"}}>
           <p style={{
             ...fade(benefitsR.visible,0),
             textAlign:"center",fontSize:13,fontWeight:700,
             letterSpacing:"0.2em",textTransform:"uppercase",
-            color:"rgba(255,255,255,0.3)",marginBottom:56,
+            color:"rgba(255,255,255,0.3)",marginBottom:72,
           }}>
             {c.benefits.label}
           </p>
 
-          <div style={{
-            display:"grid",
-            gridTemplateColumns:"repeat(2, 1fr)",
-            gap:16,
-          }}>
+          <div>
             {c.benefits.items.map((b, i) => (
-              <div key={i} className="ds-glass" style={{
+              <div key={i} className="ds-benefit-row" style={{
                 ...fade(benefitsR.visible, 0.1 + i * 0.1),
-                padding:b.size==="large"?"48px 40px":"36px 32px",
-                gridColumn:b.size==="large"?"span 2":"span 1",
+                display:"grid",
+                gridTemplateColumns:"80px 1fr",
+                gap:0,
+                borderTop:i===0?"1px solid rgba(255,255,255,0.08)":"none",
+                borderBottom:"1px solid rgba(255,255,255,0.08)",
+                padding:"48px 0",
+                position:"relative",
+                cursor:"default",
               }}>
-                <h3 style={{
-                  fontSize:b.size==="large"?24:19,
-                  fontWeight:800,letterSpacing:"-0.02em",
-                  marginBottom:12,
+                {/* Hover glow — absolute behind content */}
+                <div style={{
+                  position:"absolute",inset:"-1px -24px",
+                  borderRadius:16,
+                  background:"linear-gradient(90deg, rgba(232,93,74,0.04), rgba(212,165,71,0.02), transparent)",
+                  opacity:0,
+                  transition:"opacity 0.5s",
+                  pointerEvents:"none",
+                }} className="ds-benefit-glow"/>
+
+                {/* Big number */}
+                <div style={{
+                  position:"relative",zIndex:1,
+                  display:"flex",alignItems:"flex-start",paddingTop:4,
                 }}>
-                  {b.title}
-                </h3>
-                <p style={{
-                  fontSize:b.size==="large"?17:15,
-                  color:"rgba(255,255,255,0.5)",lineHeight:1.6,
-                  maxWidth:b.size==="large"?600:undefined,
-                }}>
-                  {b.text}
-                </p>
+                  <span className="ds-grad-text" style={{
+                    fontSize:48,fontWeight:900,
+                    lineHeight:1,letterSpacing:"-0.04em",
+                    opacity:0.6,
+                  }}>
+                    {String(i+1).padStart(2,"0")}
+                  </span>
+                </div>
+
+                {/* Content */}
+                <div style={{position:"relative",zIndex:1}}>
+                  <h3 style={{
+                    fontSize:"clamp(20px,3vw,28px)",fontWeight:800,
+                    letterSpacing:"-0.02em",marginBottom:12,
+                    lineHeight:1.2,
+                  }}>
+                    {b.title}
+                  </h3>
+                  <p style={{
+                    fontSize:16,lineHeight:1.65,
+                    color:"rgba(255,255,255,0.45)",
+                    maxWidth:560,
+                  }}>
+                    {b.text}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
