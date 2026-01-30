@@ -19,7 +19,7 @@ const t = {
     hero: {
       dateLabel: "KURZUSINDULÁS",
       dateDay: "FEB 02",
-      dateYear: "2025",
+      dateYear: "2026",
       h1_1: "Érezd a",
       h1_2: "ritmust.",
       sub: "Salsa · Bachata · Kizomba",
@@ -145,7 +145,7 @@ const t = {
     hero: {
       dateLabel: "COURSE STARTS",
       dateDay: "FEB 02",
-      dateYear: "2025",
+      dateYear: "2026",
       h1_1: "Feel the",
       h1_2: "rhythm.",
       sub: "Salsa · Bachata · Kizomba",
@@ -345,10 +345,25 @@ export default function DrSalsaPage() {
   return (
     <>
       <style>{`
-        body{background:#0A0A0A !important;margin:0}
+        body{background:#f5f2ed !important;margin:0}
         *,*::before,*::after{box-sizing:border-box}
-        .ds{font-family:'Inter',system-ui,-apple-system,sans-serif;color:#fff;overflow-x:hidden}
+        .ds{font-family:'Inter',system-ui,-apple-system,sans-serif;color:#1c1917;overflow-x:hidden;background:#f5f2ed}
         .ds a{color:inherit}
+
+        /* Section with background image + overlay for readability */
+        .ds-section-bg{
+          position:relative;overflow:hidden;
+        }
+        .ds-section-bg .ds-bg-image{
+          position:absolute;inset:0;
+          background-size:cover;background-position:center;
+          background-repeat:no-repeat;
+        }
+        .ds-section-bg .ds-bg-overlay{
+          position:absolute;inset:0;
+          pointer-events:none;
+        }
+        .ds-section-bg .ds-bg-content{position:relative;z-index:2}
 
         /* Animated gradient orb */
         @keyframes ds-float{
@@ -378,16 +393,16 @@ export default function DrSalsaPage() {
 
         /* Glass card */
         .ds-glass{
-          background:rgba(255,255,255,0.04);
-          border:1px solid rgba(255,255,255,0.08);
+          background:rgba(255,255,255,0.6);
+          border:1px solid rgba(28,25,23,0.1);
           backdrop-filter:blur(20px);
           -webkit-backdrop-filter:blur(20px);
           border-radius:24px;
           transition:all 0.4s ease;
         }
         .ds-glass:hover{
-          background:rgba(255,255,255,0.07);
-          border-color:rgba(255,255,255,0.15);
+          background:rgba(255,255,255,0.75);
+          border-color:rgba(28,25,23,0.15);
           transform:translateY(-4px);
         }
 
@@ -427,9 +442,9 @@ export default function DrSalsaPage() {
         .ds-faq-btn{
           width:100%;display:flex;align-items:center;justify-content:space-between;
           padding:28px 0;background:none;border:none;
-          font-size:18px;font-weight:600;color:#fff;
+          font-size:18px;font-weight:600;color:#1c1917;
           cursor:pointer;text-align:left;font-family:inherit;
-          border-bottom:1px solid rgba(255,255,255,0.06);
+          border-bottom:1px solid rgba(28,25,23,0.1);
           transition:color 0.3s;
         }
         .ds-faq-btn:hover{color:#E85D4A}
@@ -452,8 +467,10 @@ export default function DrSalsaPage() {
         /* Dance style card hover gradient border */
         .ds-dance-card{
           position:relative;
-          background:rgba(255,255,255,0.03);
-          border:1px solid rgba(255,255,255,0.06);
+          background:rgba(255,255,255,0.65);
+          backdrop-filter:blur(16px);
+          -webkit-backdrop-filter:blur(16px);
+          border:1px solid rgba(28,25,23,0.1);
           border-radius:28px;
           padding:44px 36px;
           transition:all 0.5s cubic-bezier(0.16,1,0.3,1);
@@ -462,14 +479,14 @@ export default function DrSalsaPage() {
         .ds-dance-card::before{
           content:'';position:absolute;inset:-1px;
           border-radius:28px;padding:1px;
-          background:linear-gradient(135deg,transparent,rgba(232,93,74,0.3),transparent);
+          background:linear-gradient(135deg,transparent,rgba(232,93,74,0.35),transparent);
           -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
           -webkit-mask-composite:xor;mask-composite:exclude;
           opacity:0;transition:opacity 0.5s;
         }
         .ds-dance-card:hover::before{opacity:1}
         .ds-dance-card:hover{
-          background:rgba(255,255,255,0.06);
+          background:rgba(255,255,255,0.85);
           transform:translateY(-8px);
         }
 
@@ -498,51 +515,54 @@ export default function DrSalsaPage() {
           position:"fixed",top:0,left:0,right:0,zIndex:100,
           padding:"14px 24px",
           display:"flex",alignItems:"center",justifyContent:"space-between",
-          background:navSolid?"rgba(10,10,10,0.9)":"transparent",
+          background:navSolid?"rgba(245,242,237,0.96)":"transparent",
           backdropFilter:navSolid?"blur(16px)":"none",
-          borderBottom:navSolid?"1px solid rgba(255,255,255,0.06)":"none",
+          borderBottom:navSolid?"1px solid rgba(28,25,23,0.08)":"none",
           transition:"all 0.4s ease",
         }}>
-          <div style={{fontSize:20,fontWeight:800,letterSpacing:"-0.02em"}}>
-            <span style={{color:"#E85D4A"}}>Dr.</span>{" "}Salsa
-          </div>
+          <a href="#" onClick={(e)=>{e.preventDefault();window.scrollTo({top:0,behavior:"smooth"})}} style={{display:"flex",alignItems:"center"}}>
+            <img src="/figala/drsalsa/img/salsalogo.png" alt="Dr. Salsa" style={{height:40,width:"auto",objectFit:"contain",display:"block"}} />
+          </a>
           <div style={{display:"flex",alignItems:"center",gap:12}}>
-            <div style={{display:"flex",background:"rgba(255,255,255,0.06)",borderRadius:100,padding:3}}>
+            <div style={{display:"flex",background:"rgba(28,25,23,0.06)",borderRadius:100,padding:3}}>
               <button className="ds-lang" onClick={()=>setLang("hu")}
-                style={{background:lang==="hu"?"rgba(255,255,255,0.12)":"transparent",color:lang==="hu"?"#fff":"rgba(255,255,255,0.4)"}}>
+                style={{background:lang==="hu"?"rgba(28,25,23,0.12)":"transparent",color:lang==="hu"?"#1c1917":"rgba(28,25,23,0.5)"}}>
                 HU
               </button>
               <button className="ds-lang" onClick={()=>setLang("en")}
-                style={{background:lang==="en"?"rgba(255,255,255,0.12)":"transparent",color:lang==="en"?"#fff":"rgba(255,255,255,0.4)"}}>
+                style={{background:lang==="en"?"rgba(28,25,23,0.12)":"transparent",color:lang==="en"?"#1c1917":"rgba(28,25,23,0.5)"}}>
                 EN
               </button>
             </div>
-            <button className="ds-cta" onClick={scrollToCta}
-              style={{padding:"10px 24px",fontSize:13}}>{c.nav.cta}</button>
+            <a href="tel:+36209384691" className="ds-cta" style={{padding:"10px 24px",fontSize:13}}>{c.nav.cta}</a>
           </div>
         </nav>
 
         {/* ─── HERO ─── */}
-        <section ref={heroR.ref} style={{
+        <section ref={heroR.ref} className="ds-section-bg" style={{
           minHeight:"100vh",display:"flex",flexDirection:"column",
           alignItems:"center",justifyContent:"center",
-          position:"relative",overflow:"hidden",
           padding:"120px 24px 80px",
         }}>
+          <div className="ds-bg-image" style={{
+            backgroundImage:"url(/figala/drsalsa/img/8J5A0132.JPG)",
+          }} />
+          <div className="ds-bg-overlay" style={{
+            background:"linear-gradient(180deg, rgba(245,242,237,0.65) 0%, rgba(245,242,237,0.82) 50%, rgba(245,242,237,0.95) 100%)",
+          }} />
           {/* Orbs */}
-          <div className="ds-orb" style={{width:600,height:600,top:"-15%",right:"-10%",background:"radial-gradient(circle,rgba(232,93,74,0.2),transparent 70%)"}} />
-          <div className="ds-orb" style={{width:500,height:500,bottom:"-10%",left:"-12%",background:"radial-gradient(circle,rgba(212,165,71,0.12),transparent 70%)",animationDelay:"-3s"}} />
-          <div className="ds-orb" style={{width:300,height:300,top:"40%",left:"50%",background:"radial-gradient(circle,rgba(232,93,74,0.08),transparent 70%)",animationDelay:"-5s"}} />
+          <div className="ds-orb" style={{width:600,height:600,top:"-15%",right:"-10%",background:"radial-gradient(circle,rgba(232,93,74,0.18),transparent 70%)",zIndex:1}} />
+          <div className="ds-orb" style={{width:500,height:500,bottom:"-10%",left:"-12%",background:"radial-gradient(circle,rgba(212,165,71,0.1),transparent 70%)",animationDelay:"-3s",zIndex:1}} />
 
           {/* Subtle grid pattern */}
           <div style={{
-            position:"absolute",inset:0,
-            backgroundImage:"linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)",
+            position:"absolute",inset:0,zIndex:1,
+            backgroundImage:"linear-gradient(rgba(28,25,23,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(28,25,23,0.06) 1px, transparent 1px)",
             backgroundSize:"80px 80px",
             pointerEvents:"none",
           }}/>
 
-          <div style={{position:"relative",zIndex:2,textAlign:"center",maxWidth:900}}>
+          <div className="ds-bg-content" style={{textAlign:"center",maxWidth:900}}>
             {/* Date display — prominent */}
             <div style={fade(heroR.visible,0)}>
               <div style={{
@@ -555,9 +575,9 @@ export default function DrSalsaPage() {
                   background:"linear-gradient(135deg,#E85D4A,#D14030)",
                   padding:"14px 24px",
                   display:"flex",flexDirection:"column",alignItems:"center",
-                  lineHeight:1,
+                  lineHeight:1,color:"#fff",
                 }}>
-                  <span style={{fontSize:10,fontWeight:800,letterSpacing:"0.15em",opacity:0.7}}>
+                  <span style={{fontSize:10,fontWeight:800,letterSpacing:"0.15em",opacity:0.9}}>
                     {c.hero.dateLabel}
                   </span>
                   <span style={{fontSize:28,fontWeight:900,letterSpacing:"-0.02em",marginTop:4}}>
@@ -566,7 +586,7 @@ export default function DrSalsaPage() {
                 </div>
                 <div style={{padding:"12px 24px"}}>
                   <span style={{
-                    fontSize:13,fontWeight:600,color:"rgba(255,255,255,0.7)",
+                    fontSize:13,fontWeight:600,color:"rgba(28,25,23,0.75)",
                     letterSpacing:"0.03em",
                   }}>
                     {c.hero.dateYear}
@@ -599,7 +619,7 @@ export default function DrSalsaPage() {
               fontSize:"clamp(14px,2vw,18px)",
               fontWeight:600,letterSpacing:"0.25em",
               textTransform:"uppercase",
-              color:"rgba(255,255,255,0.35)",
+              color:"rgba(28,25,23,0.55)",
               marginBottom:24,
             }}>
               {c.hero.sub}
@@ -609,7 +629,7 @@ export default function DrSalsaPage() {
             <p style={{
               ...fade(heroR.visible,0.4),
               fontSize:"clamp(16px,2vw,20px)",
-              color:"rgba(255,255,255,0.55)",
+              color:"rgba(28,25,23,0.7)",
               lineHeight:1.6,maxWidth:560,
               margin:"0 auto 48px",
             }}>
@@ -618,38 +638,41 @@ export default function DrSalsaPage() {
 
             {/* CTA */}
             <div style={fade(heroR.visible,0.55)}>
-              <button className="ds-cta" onClick={scrollToCta}>
+              <a href="tel:+36209384691" className="ds-cta">
                 {c.hero.cta}
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
-              </button>
+              </a>
             </div>
           </div>
 
           {/* Scroll indicator */}
-          <div style={{
+          <div className="ds-bg-content" style={{
             ...fade(heroR.visible,0.8),
             position:"absolute",bottom:40,
             display:"flex",flexDirection:"column",alignItems:"center",gap:12,
           }}>
-            <span style={{fontSize:11,letterSpacing:"0.15em",textTransform:"uppercase",color:"rgba(255,255,255,0.2)"}}>
+            <span style={{fontSize:11,letterSpacing:"0.15em",textTransform:"uppercase",color:"rgba(28,25,23,0.35)"}}>
               {c.hero.scroll}
             </span>
             <div style={{
               width:1,height:40,
-              background:"linear-gradient(to bottom, rgba(255,255,255,0.2), transparent)",
+              background:"linear-gradient(to bottom, rgba(28,25,23,0.2), transparent)",
             }}/>
           </div>
         </section>
 
         {/* ─── DANCE STYLES ─── */}
-        <section ref={stylesR.ref} style={{padding:"120px 24px",maxWidth:1200,margin:"0 auto"}}>
+        <section ref={stylesR.ref} className="ds-section-bg" style={{padding:"120px 24px",maxWidth:1200,margin:"0 auto"}}>
+          <div className="ds-bg-image" style={{backgroundImage:"url(/figala/drsalsa/img/8J5A0039.JPG)"}} />
+          <div className="ds-bg-overlay" style={{background:"linear-gradient(180deg, rgba(245,242,237,0.82) 0%, rgba(245,242,237,0.94) 100%)"}} />
+          <div className="ds-bg-content">
           <p style={{
             ...fade(stylesR.visible,0),
             textAlign:"center",fontSize:13,fontWeight:700,
             letterSpacing:"0.2em",textTransform:"uppercase",
-            color:"rgba(255,255,255,0.3)",marginBottom:64,
+            color:"rgba(28,25,23,0.5)",marginBottom:64,
           }}>
             {c.styles.label}
           </p>
@@ -665,7 +688,7 @@ export default function DrSalsaPage() {
                 <div style={{
                   position:"absolute",top:24,right:28,
                   fontSize:80,fontWeight:900,lineHeight:1,
-                  color:"rgba(255,255,255,0.02)",
+                  color:"rgba(28,25,23,0.12)",
                   letterSpacing:"-0.04em",
                 }}>
                   0{i+1}
@@ -686,27 +709,22 @@ export default function DrSalsaPage() {
                 </h3>
                 <p style={{
                   fontSize:15,lineHeight:1.65,
-                  color:"rgba(255,255,255,0.5)",
+                  color:"rgba(28,25,23,0.65)",
                 }}>
                   {s.desc}
                 </p>
               </div>
             ))}
           </div>
+          </div>
         </section>
 
         {/* ─── URGENCY DATE ─── */}
-        <section style={{
-          padding:"100px 24px",
-          position:"relative",overflow:"hidden",
-          textAlign:"center",
-        }}>
-          <div style={{
-            position:"absolute",inset:0,
-            background:"radial-gradient(ellipse 70% 60% at 50% 50%, rgba(232,93,74,0.06), transparent)",
-            pointerEvents:"none",
-          }}/>
-          <div style={{position:"relative",zIndex:2,maxWidth:700,margin:"0 auto"}}>
+        <section className="ds-section-bg" style={{padding:"100px 24px",textAlign:"center"}}>
+          <div className="ds-bg-image" style={{backgroundImage:"url(/figala/drsalsa/img/8J5A0169.JPG)"}} />
+          <div className="ds-bg-overlay" style={{background:"linear-gradient(180deg, rgba(245,242,237,0.75) 0%, rgba(245,242,237,0.92) 100%)"}} />
+          <div style={{position:"absolute",inset:0,background:"radial-gradient(ellipse 70% 60% at 50% 50%, rgba(232,93,74,0.06), transparent)",pointerEvents:"none",zIndex:1}}/>
+          <div className="ds-bg-content" style={{maxWidth:700,margin:"0 auto"}}>
             <p style={{
               fontSize:"clamp(28px,5vw,48px)",
               fontWeight:900,letterSpacing:"-0.03em",
@@ -724,22 +742,25 @@ export default function DrSalsaPage() {
               {c.urgency.post}
             </p>
             <p style={{
-              fontSize:16,color:"rgba(255,255,255,0.4)",
+              fontSize:16,color:"rgba(28,25,23,0.6)",
               marginBottom:36,letterSpacing:"0.02em",
             }}>
               {c.urgency.spots}
             </p>
-            <button className="ds-cta" onClick={scrollToCta}>
+            <a href="tel:+36209384691" className="ds-cta">
               {c.urgency.cta}
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
-            </button>
+            </a>
           </div>
         </section>
 
         {/* ─── PROBLEM ─── */}
-        <section ref={problemR.ref} style={{padding:"100px 24px",maxWidth:800,margin:"0 auto"}}>
+        <section ref={problemR.ref} className="ds-section-bg" style={{padding:"100px 24px",maxWidth:800,margin:"0 auto"}}>
+          <div className="ds-bg-image" style={{backgroundImage:"url(/figala/drsalsa/img/8J5A0076.JPG)"}} />
+          <div className="ds-bg-overlay" style={{background:"rgba(245,242,237,0.88)"}} />
+          <div className="ds-bg-content">
           <h2 style={{
             ...fade(problemR.visible,0),
             fontSize:"clamp(32px,5vw,48px)",fontWeight:900,
@@ -754,16 +775,16 @@ export default function DrSalsaPage() {
               <div key={i} style={{
                 ...fade(problemR.visible, 0.1 + i * 0.08),
                 padding:"28px 0",
-                borderBottom:"1px solid rgba(255,255,255,0.06)",
+                borderBottom:"1px solid rgba(28,25,23,0.1)",
                 display:"flex",alignItems:"center",gap:20,
               }}>
                 <span style={{
-                  fontSize:14,fontWeight:800,color:"rgba(255,255,255,0.12)",
+                  fontSize:14,fontWeight:800,color:"rgba(28,25,23,0.25)",
                   minWidth:28,
                 }}>
                   0{i+1}
                 </span>
-                <p style={{fontSize:17,lineHeight:1.5,color:"rgba(255,255,255,0.55)",fontWeight:500}}>
+                <p style={{fontSize:17,lineHeight:1.5,color:"rgba(28,25,23,0.7)",fontWeight:500}}>
                   {item}
                 </p>
               </div>
@@ -782,12 +803,14 @@ export default function DrSalsaPage() {
               <span className="ds-grad-text">{c.problem.answer}</span>
             </p>
           </div>
+          </div>
         </section>
 
         {/* ─── STATS ─── */}
-        <section ref={statsR.ref} style={{
-          padding:"80px 24px",maxWidth:1100,margin:"0 auto",
-        }}>
+        <section ref={statsR.ref} className="ds-section-bg" style={{padding:"80px 24px",maxWidth:1100,margin:"0 auto"}}>
+          <div className="ds-bg-image" style={{backgroundImage:"url(/figala/drsalsa/img/8J5A0135.JPG)"}} />
+          <div className="ds-bg-overlay" style={{background:"linear-gradient(180deg, rgba(245,242,237,0.8) 0%, rgba(245,242,237,0.92) 100%)"}} />
+          <div className="ds-bg-content">
           <div style={{
             display:"grid",
             gridTemplateColumns:"repeat(auto-fit, minmax(200px, 1fr))",
@@ -800,7 +823,7 @@ export default function DrSalsaPage() {
                   ...fade(statsR.visible, 0.1 + i * 0.1),
                   textAlign:"center",
                   padding:"40px 20px",
-                  borderRight:i < c.stats.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
+                  borderRight:i < c.stats.length - 1 ? "1px solid rgba(28,25,23,0.1)" : "none",
                 }}>
                   <div className="ds-stat-num">
                     <span className="ds-grad-text">
@@ -808,7 +831,7 @@ export default function DrSalsaPage() {
                     </span>
                   </div>
                   <p style={{
-                    fontSize:14,color:"rgba(255,255,255,0.35)",
+                    fontSize:14,color:"rgba(28,25,23,0.55)",
                     marginTop:12,fontWeight:500,letterSpacing:"0.02em",
                   }}>
                     {stat.label}
@@ -817,15 +840,19 @@ export default function DrSalsaPage() {
               );
             })}
           </div>
+          </div>
         </section>
 
         {/* ─── BENEFITS ─── */}
-        <section ref={benefitsR.ref} style={{padding:"100px 24px",maxWidth:900,margin:"0 auto"}}>
+        <section ref={benefitsR.ref} className="ds-section-bg" style={{padding:"100px 24px",maxWidth:900,margin:"0 auto"}}>
+          <div className="ds-bg-image" style={{backgroundImage:"url(/figala/drsalsa/img/8J5A0076.JPG)"}} />
+          <div className="ds-bg-overlay" style={{background:"rgba(245,242,237,0.85)"}} />
+          <div className="ds-bg-content">
           <p style={{
             ...fade(benefitsR.visible,0),
             textAlign:"center",fontSize:13,fontWeight:700,
             letterSpacing:"0.2em",textTransform:"uppercase",
-            color:"rgba(255,255,255,0.3)",marginBottom:72,
+            color:"rgba(28,25,23,0.5)",marginBottom:72,
           }}>
             {c.benefits.label}
           </p>
@@ -837,8 +864,8 @@ export default function DrSalsaPage() {
                 display:"grid",
                 gridTemplateColumns:"80px 1fr",
                 gap:0,
-                borderTop:i===0?"1px solid rgba(255,255,255,0.08)":"none",
-                borderBottom:"1px solid rgba(255,255,255,0.08)",
+                borderTop:i===0?"1px solid rgba(28,25,23,0.1)":"none",
+                borderBottom:"1px solid rgba(28,25,23,0.1)",
                 padding:"48px 0",
                 position:"relative",
                 cursor:"default",
@@ -878,7 +905,7 @@ export default function DrSalsaPage() {
                   </h3>
                   <p style={{
                     fontSize:16,lineHeight:1.65,
-                    color:"rgba(255,255,255,0.45)",
+                    color:"rgba(28,25,23,0.65)",
                     maxWidth:560,
                   }}>
                     {b.text}
@@ -887,20 +914,16 @@ export default function DrSalsaPage() {
               </div>
             ))}
           </div>
+          </div>
         </section>
 
         {/* ─── OFFER ─── */}
-        <section id="ds-offer" ref={offerR.ref} style={{
-          padding:"120px 24px",position:"relative",overflow:"hidden",
-        }}>
-          {/* Background glow */}
-          <div style={{
-            position:"absolute",inset:0,
-            background:"radial-gradient(ellipse 60% 50% at 50% 50%, rgba(232,93,74,0.08), transparent)",
-            pointerEvents:"none",
-          }}/>
+        <section id="ds-offer" ref={offerR.ref} className="ds-section-bg" style={{padding:"120px 24px"}}>
+          <div className="ds-bg-image" style={{backgroundImage:"url(/figala/drsalsa/img/8J5A0169.JPG)"}} />
+          <div className="ds-bg-overlay" style={{background:"linear-gradient(180deg, rgba(245,242,237,0.7) 0%, rgba(245,242,237,0.9) 100%)"}} />
+          <div style={{position:"absolute",inset:0,background:"radial-gradient(ellipse 60% 50% at 50% 50%, rgba(232,93,74,0.1), transparent)",pointerEvents:"none",zIndex:1}}/>
 
-          <div style={{maxWidth:700,margin:"0 auto",textAlign:"center",position:"relative",zIndex:2}}>
+          <div className="ds-bg-content" style={{maxWidth:700,margin:"0 auto",textAlign:"center"}}>
             <h2 style={{
               ...fade(offerR.visible,0),
               fontSize:"clamp(40px,7vw,72px)",
@@ -912,7 +935,7 @@ export default function DrSalsaPage() {
             <p style={{
               ...fade(offerR.visible,0.1),
               fontSize:18,lineHeight:1.65,
-              color:"rgba(255,255,255,0.5)",
+              color:"rgba(28,25,23,0.65)",
               marginBottom:48,maxWidth:560,margin:"0 auto 48px",
             }}>
               {c.offer.sub}
@@ -927,7 +950,7 @@ export default function DrSalsaPage() {
               {c.offer.details.map((d,i) => (
                 <div key={i} style={{
                   display:"flex",alignItems:"center",gap:10,
-                  fontSize:14,fontWeight:500,color:"rgba(255,255,255,0.6)",
+                  fontSize:14,fontWeight:500,color:"rgba(28,25,23,0.65)",
                 }}>
                   <div style={{
                     width:20,height:20,borderRadius:"50%",
@@ -946,7 +969,7 @@ export default function DrSalsaPage() {
             {/* CTA */}
             <div style={fade(offerR.visible,0.3)}>
               {/* Dev note: Replace href with actual signup link */}
-              <a href="https://drsalsa.hu" target="_blank" rel="noopener noreferrer" className="ds-cta">
+              <a href="tel:+36209384691" className="ds-cta">
                 {c.offer.cta}
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -957,7 +980,10 @@ export default function DrSalsaPage() {
         </section>
 
         {/* ─── FAQ ─── */}
-        <section ref={faqR.ref} style={{padding:"100px 24px",maxWidth:700,margin:"0 auto"}}>
+        <section ref={faqR.ref} className="ds-section-bg" style={{padding:"100px 24px",maxWidth:700,margin:"0 auto"}}>
+          <div className="ds-bg-image" style={{backgroundImage:"url(/figala/drsalsa/img/8J5A0039.JPG)"}} />
+          <div className="ds-bg-overlay" style={{background:"rgba(245,242,237,0.88)"}} />
+          <div className="ds-bg-content">
           <h2 style={{
             ...fade(faqR.visible,0),
             fontSize:"clamp(28px,4vw,40px)",fontWeight:900,
@@ -976,8 +1002,8 @@ export default function DrSalsaPage() {
                   <span style={{
                     width:28,height:28,borderRadius:"50%",
                     display:"flex",alignItems:"center",justifyContent:"center",
-                    background:openFaq===i?"rgba(232,93,74,0.15)":"rgba(255,255,255,0.04)",
-                    color:openFaq===i?"#E85D4A":"rgba(255,255,255,0.3)",
+                    background:openFaq===i?"rgba(232,93,74,0.15)":"rgba(28,25,23,0.06)",
+                    color:openFaq===i?"#E85D4A":"rgba(28,25,23,0.5)",
                     transition:"all 0.3s",flexShrink:0,marginLeft:16,
                   }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -995,7 +1021,7 @@ export default function DrSalsaPage() {
                 }}>
                   <p style={{
                     fontSize:15,lineHeight:1.65,
-                    color:"rgba(255,255,255,0.4)",
+                    color:"rgba(28,25,23,0.6)",
                     paddingBottom:24,
                   }}>
                     {item.a}
@@ -1004,20 +1030,21 @@ export default function DrSalsaPage() {
               </div>
             ))}
           </div>
+          </div>
         </section>
 
         {/* ─── FINAL CTA ─── */}
-        <section ref={finalR.ref} style={{
-          padding:"120px 24px",textAlign:"center",
-          position:"relative",overflow:"hidden",
-        }}>
+        <section ref={finalR.ref} className="ds-section-bg" style={{padding:"120px 24px",textAlign:"center"}}>
+          <div className="ds-bg-image" style={{backgroundImage:"url(/figala/drsalsa/img/8J5A0132.JPG)"}} />
+          <div className="ds-bg-overlay" style={{background:"linear-gradient(180deg, rgba(245,242,237,0.72) 0%, rgba(245,242,237,0.93) 100%)"}} />
           <div className="ds-orb" style={{
             width:400,height:400,top:"50%",left:"50%",
             marginTop:-200,marginLeft:-200,
-            background:"radial-gradient(circle,rgba(232,93,74,0.1),transparent 70%)",
+            background:"radial-gradient(circle,rgba(232,93,74,0.08),transparent 70%)",
+            zIndex:1,
           }}/>
 
-          <div style={{position:"relative",zIndex:2,maxWidth:650,margin:"0 auto"}}>
+          <div className="ds-bg-content" style={{maxWidth:650,margin:"0 auto"}}>
             <h2 style={{
               ...fade(finalR.visible,0),
               fontSize:"clamp(28px,5vw,48px)",fontWeight:900,
@@ -1028,18 +1055,18 @@ export default function DrSalsaPage() {
             </h2>
             <p style={{
               ...fade(finalR.visible,0.1),
-              color:"rgba(255,255,255,0.4)",fontSize:18,
+              color:"rgba(28,25,23,0.6)",fontSize:18,
               lineHeight:1.6,marginBottom:44,
             }}>
               {c.finalCta.sub}
             </p>
             <div style={fade(finalR.visible,0.2)}>
-              <button className="ds-cta" onClick={scrollToCta}>
+              <a href="tel:+36209384691" className="ds-cta">
                 {c.finalCta.cta}
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
-              </button>
+              </a>
             </div>
           </div>
         </section>
@@ -1047,20 +1074,23 @@ export default function DrSalsaPage() {
         {/* ─── FOOTER ─── */}
         <footer style={{
           padding:"48px 24px",
-          borderTop:"1px solid rgba(255,255,255,0.04)",
+          borderTop:"1px solid rgba(28,25,23,0.08)",
           textAlign:"center",
         }}>
-          <p style={{fontSize:14,color:"rgba(255,255,255,0.25)",marginBottom:16}}>
+          <a href="#" onClick={(e)=>{e.preventDefault();window.scrollTo({top:0,behavior:"smooth"})}} style={{display:"inline-block",marginBottom:20}}>
+            <img src="/figala/drsalsa/img/salsalogo.png" alt="Dr. Salsa" style={{height:36,width:"auto",objectFit:"contain",opacity:0.7}} />
+          </a>
+          <p style={{fontSize:14,color:"rgba(28,25,23,0.45)",marginBottom:16}}>
             {c.footer.copy}
           </p>
           <a href="https://brillcode.hu" target="_blank" rel="noopener noreferrer"
             style={{
-              fontSize:11,color:"rgba(255,255,255,0.12)",
+              fontSize:11,color:"rgba(28,25,23,0.25)",
               textDecoration:"none",letterSpacing:"0.2em",
               transition:"color 0.3s",
             }}
-            onMouseEnter={e=>e.currentTarget.style.color="rgba(255,255,255,0.3)"}
-            onMouseLeave={e=>e.currentTarget.style.color="rgba(255,255,255,0.12)"}>
+            onMouseEnter={e=>e.currentTarget.style.color="rgba(28,25,23,0.6)"}
+            onMouseLeave={e=>e.currentTarget.style.color="rgba(28,25,23,0.25)"}>
             {c.footer.made}
           </a>
         </footer>
