@@ -118,6 +118,18 @@ Az űrlap automatikusan küld emailt, amikor valaki kitölti. Két emailt küld:
 - Project Settings → Environment Variables
 - Add: `RESEND_API_KEY`, `ADMIN_EMAIL`, opcionálisan `ADMIN_FROM_EMAIL` (admin értesítések feladója, alapértelmezett: boss@brillcode.hu)
 
+### Megrendelések rögzítése (Vercel Blob)
+
+A főoldali megrendelések (ki, mikor, milyen adatokkal) egy JSON fájlban tárolódnak a Vercel Blob-ban (adatbázis nélkül).
+
+1. **Vercel Blob store:** Vercel Dashboard → Storage → Create Database → Blob. Másold ki a `BLOB_READ_WRITE_TOKEN` értékét.
+2. **Környezeti változók (Vercel):**
+   - `BLOB_READ_WRITE_TOKEN` – a Blob store tokene
+   - `ORDERS_SECRET` – tetszőleges jelszó a megrendelések listája megtekintéséhez
+3. **Lista megtekintése:** Nyisd meg a `brillcode.hu/megrendelesek` oldalt, add meg az `ORDERS_SECRET` értékét, majd kattints a „Lista betöltése” gombra.
+
+Ha a Blob nincs beállítva, a megrendelések továbbra is kimennek emailben; a rögzítés egyszerűen kimarad (a válasz sikeres marad).
+
 ### SEO és metaadatok
 
 A metaadatok az `app/layout.tsx` fájlban találhatók:

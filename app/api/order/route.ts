@@ -1,5 +1,6 @@
 import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
+import { appendOrder } from '@/lib/orders-blob';
 
 function escapeHtml(s: string): string {
   if (!s) return '';
@@ -285,6 +286,22 @@ export async function POST(request: NextRequest) {
         to: email,
         error: followUpResult.error,
       });
+    }
+
+    // Rögzítés (email folyamatot nem érinti – hiba esetén is 200 marad)
+    try {
+      await appendOrder({
+        timestamp: new Date().toISOString(),
+        name: String(name ?? '').trim(),
+        email: String(email ?? '').trim(),
+        phone: phone ? String(phone).trim() : undefined,
+        business: String(business ?? '').trim(),
+        goal: String(goal ?? '').trim(),
+        hasWebsite: hasWebsite ? String(hasWebsite).trim() : undefined,
+        notes: notes ? String(notes).trim() : undefined,
+      });
+    } catch (err) {
+      console.error('Orders blob save failed:', err);
     }
 
     return NextResponse.json(
