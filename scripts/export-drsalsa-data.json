@@ -1,0 +1,156 @@
+{
+  "hu": {
+    "nav": { "cta": "Jelentkezem" },
+    "hero": {
+      "dateLabel": "KURZUSINDULÁS",
+      "dateDay": "FEB 02",
+      "dateYear": "2026",
+      "h1_1": "Érezd a",
+      "h1_2": "ritmust.",
+      "sub": "Salsa · Bachata · Kizomba",
+      "desc": "Páros táncok, amelyek mosolyt csempésznek a hétköznapokba. Próbáld ki ingyen — partner és tapasztalat nélkül.",
+      "cta": "Ingyenes bemutatóóra",
+      "scroll": "Görgess tovább"
+    },
+    "urgency": {
+      "pre": "A kezdő kurzus",
+      "date": "február 2-án",
+      "post": "indul.",
+      "spots": "Korlátozott létszám — ne maradj le.",
+      "cta": "Foglald le a helyed"
+    },
+    "styles": {
+      "label": "Három tánc. Egy hely.",
+      "items": [
+        { "name": "Salsa", "vibe": "Energikus · Játékos · Szabad", "desc": "A salsa a tánc legéletvidámabb formája. Gyors fordulatok, improvizáció és végtelen jókedv." },
+        { "name": "Bachata", "vibe": "Érzéki · Dallamos · Intim", "desc": "Lassabb, közelibb, érzelmesebb. A bachata megtanít vezetni és követni — és közben elengedni." },
+        { "name": "Kizomba", "vibe": "Lassú · Kapcsolódó · Mély", "desc": "A legszorosabb páros tánc. Minimális lépések, maximális kapcsolódás. Meditáció mozgásban." }
+      ]
+    },
+    "problem": {
+      "h2": "Ismerős ez?",
+      "items": [
+        "Munka után Netflix, aztán alvás. Hétről hétre.",
+        "Szeretnél új embereket, de nem tudod, hol kezdd.",
+        "Az edzőterem nem a te világod.",
+        "Érzed, hogy valami hiányzik a hétköznapokból."
+      ],
+      "answer": "A tánc nem hobbi. Hanem egy életérzés."
+    },
+    "stats": [
+      { "value": "10", "suffix": "+", "label": "év tapasztalat" },
+      { "value": "2000", "suffix": "+", "label": "táncos indult nálunk" },
+      { "value": "100", "suffix": "%", "label": "elégedettségi garancia" },
+      { "value": "52", "suffix": "", "label": "buli évente" }
+    ],
+    "benefits": {
+      "label": "Miért a Dr. Salsa?",
+      "items": [
+        { "title": "Párban oktatunk", "text": "Két oktató — egyikük vezet, másikuk követ. Mindkét fél kap valódi figyelmet, nem csak az egyik." },
+        { "title": "Valódi táncterem", "text": "Profi tánctér, tükrök, hangrendszer. Nem pince, nem tornaterem — hanem egy hely, ahol jó lenni." },
+        { "title": "Heti bulik", "text": "Amit tanulsz, rögtön gyakorlod. Social dance estek minden héten, ahol a tánc élesben működik." },
+        { "title": "10+ év tapasztalat", "text": "Több ezer táncos indult el nálunk a nulláról. Tudjuk, mi működik kezdőknek — és mi nem." },
+        { "title": "100% garancia", "text": "Ha az első óra után nem tetszett? Visszaadjuk az árát. Kérdés nélkül. Zero kockázat." }
+      ]
+    },
+    "offer": {
+      "h2": "Gyere el. Ingyen.",
+      "sub": "Február 2-án indul a következő kezdő kurzus. Az első óra a miénk — neked csak nyitottnak kell lenned.",
+      "details": ["Partner nélkül is jöhetsz", "Kényelmes ruha + zárt cipő elég", "Mindenkit szívesen látunk"],
+      "cta": "Jelentkezem az ingyenes órára"
+    },
+    "faq": {
+      "h2": "Kérdések & válaszok",
+      "items": [
+        { "q": "Tényleg nem kell partner?", "a": "Nem. Mindenki cserélődik a csoportban, így egyedül is könnyedén beilleszkedsz." },
+        { "q": "Soha nem táncoltam — megoldom?", "a": "Épp ezért van a kezdő kurzus. Nulláról indulunk, lépésről lépésre." },
+        { "q": "Mi a különbség a három tánc között?", "a": "A salsa energikus, a bachata érzéki, a kizomba lassú és mély. A bemutatóórán mindháromba belekóstolsz." },
+        { "q": "Mit vegyek fel?", "a": "Kényelmes ruhát és zárt, sima talpú cipőt. Semmi extra nem kell." },
+        { "q": "Mennyibe kerül?", "a": "A bemutatóóra ingyenes. A kurzus áráról az első órán kapsz részletes tájékoztatást." }
+      ]
+    },
+    "finalCta": {
+      "h2": "A következő fejezeted február 2-án kezdődik.",
+      "sub": "Egy ingyenes óra. Semmi kockázat. Csak tánc, zene és jó energia.",
+      "cta": "Jelentkezem"
+    },
+    "footer": { "copy": "Dr. Salsa Tánciskola", "made": "B R I L L C O D E  web productions." }
+  },
+  "en": {
+    "nav": { "cta": "Sign up" },
+    "hero": {
+      "dateLabel": "COURSE STARTS",
+      "dateDay": "FEB 02",
+      "dateYear": "2026",
+      "h1_1": "Feel the",
+      "h1_2": "rhythm.",
+      "sub": "Salsa · Bachata · Kizomba",
+      "desc": "Partner dances that bring joy to everyday life. Try it for free — no partner or experience needed.",
+      "cta": "Free trial class",
+      "scroll": "Scroll down"
+    },
+    "urgency": {
+      "pre": "The beginner course",
+      "date": "starts February 2nd.",
+      "post": "",
+      "spots": "Limited spots — don't miss out.",
+      "cta": "Reserve your spot"
+    },
+    "styles": {
+      "label": "Three dances. One place.",
+      "items": [
+        { "name": "Salsa", "vibe": "Energetic · Playful · Free", "desc": "The most joyful form of dance. Quick turns, improvisation and endless fun." },
+        { "name": "Bachata", "vibe": "Sensual · Melodic · Intimate", "desc": "Slower, closer, more emotional. Bachata teaches you to lead, follow — and let go." },
+        { "name": "Kizomba", "vibe": "Slow · Connected · Deep", "desc": "The closest partner dance. Minimal steps, maximum connection. Meditation in motion." }
+      ]
+    },
+    "problem": {
+      "h2": "Sound familiar?",
+      "items": [
+        "After work it's Netflix, then sleep. Every single week.",
+        "You'd love to meet new people, but don't know where to start.",
+        "The gym isn't your thing.",
+        "You feel like something's missing from your days."
+      ],
+      "answer": "Dance isn't a hobby. It's a way of life."
+    },
+    "stats": [
+      { "value": "10", "suffix": "+", "label": "years of experience" },
+      { "value": "2000", "suffix": "+", "label": "dancers started with us" },
+      { "value": "100", "suffix": "%", "label": "satisfaction guarantee" },
+      { "value": "52", "suffix": "", "label": "parties per year" }
+    ],
+    "benefits": {
+      "label": "Why Dr. Salsa?",
+      "items": [
+        { "title": "Pair teaching", "text": "Two instructors — one leads, one follows. Both sides get real attention, not just one." },
+        { "title": "Real dance studio", "text": "Professional dance floor, mirrors, sound system. Not a basement — a place you actually want to be." },
+        { "title": "Weekly socials", "text": "Practice what you learn. Social dance nights every single week, where dance becomes real." },
+        { "title": "10+ years of experience", "text": "Thousands of dancers started from zero with us. We know what works for beginners — and what doesn't." },
+        { "title": "100% guarantee", "text": "If you didn't enjoy the first class? Full refund. No questions asked. Zero risk." }
+      ]
+    },
+    "offer": {
+      "h2": "Come. It's free.",
+      "sub": "The next beginner course starts February 2nd. The first class is on us — you just need to show up.",
+      "details": ["Come with or without a partner", "Comfortable clothes + closed shoes", "Everyone is welcome"],
+      "cta": "Sign up for the free class"
+    },
+    "faq": {
+      "h2": "Questions & answers",
+      "items": [
+        { "q": "Do I really not need a partner?", "a": "No. Everyone rotates in the group, so you'll easily fit in alone." },
+        { "q": "I've never danced — can I handle it?", "a": "That's exactly what the beginner course is for. We start from scratch." },
+        { "q": "What's the difference between the three dances?", "a": "Salsa is energetic, bachata is sensual, kizomba is slow and deep. You can try all three at the trial." },
+        { "q": "What should I wear?", "a": "Comfortable clothes and closed, smooth-soled shoes. Nothing fancy." },
+        { "q": "How much does it cost?", "a": "The trial class is free. We'll share pricing details at the first session." }
+      ]
+    },
+    "finalCta": {
+      "h2": "Your next chapter starts February 2nd.",
+      "sub": "One free class. No risk. Just dance, music and good energy.",
+      "cta": "Sign up"
+    },
+    "footer": { "copy": "Dr. Salsa Dance School", "made": "B R I L L C O D E  web productions." }
+  }
+}

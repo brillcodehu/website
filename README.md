@@ -130,6 +130,14 @@ A főoldali megrendelések (ki, mikor, milyen adatokkal) egy JSON fájlban táro
 
 Ha a Blob nincs beállítva, a megrendelések továbbra is kimennek emailben; a rögzítés egyszerűen kimarad (a válasz sikeres marad).
 
+### Dr. Salsa statikus export (ZIP letöltés)
+
+A Dr. Salsa oldal tartalma önálló HTML + képek formájában exportálható ZIP-be, amely letölthető a **https://brillcode.hu/download/drsalsa-export.zip** linkről.
+
+1. **Export futtatása:** `npm run export-drsalsa`
+2. **Eredmény:** `public/download/drsalsa-export.zip` – tartalmazza az `index.html`-t (HU/EN váltó, inline CSS/JS) és az `img/` mappát.
+3. A ZIP a `public/` alatt van, ezért deploy után a `/download/drsalsa-export.zip` URL-ről szolgálódik.
+
 ### SEO és metaadatok
 
 A metaadatok az `app/layout.tsx` fájlban találhatók:
