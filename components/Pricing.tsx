@@ -1,7 +1,7 @@
 "use client";
 
 import { useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 const included = [
   "Egyedi, reszponzív dizájn",
@@ -35,6 +35,14 @@ export default function Pricing() {
   const containerRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [isHovered, setIsHovered] = useState(false);
+
+  // Meta Pixel: ViewContent ha az árazás szekció láthatóvá válik (egyszer)
+  useEffect(() => {
+    if (!isInView) return;
+    const w = typeof window !== "undefined" ? (window as unknown as { fbq?: (a: string, b: string, c?: object) => void }) : null;
+    if (w?.fbq) w.fbq("track", "ViewContent", { content_name: "Árazás", value: 9400, currency: "HUF" });
+  }, [isInView]);
+
   // Removed scroll-based animation for better performance
   // const { scrollYProgress } = useScroll({
   //   target: containerRef,
