@@ -4,26 +4,40 @@ import { useState } from "react";
 
 type EmailType = "first_view" | "product_ready" | "complete";
 
+type LineItem = { label: string; amount: string };
+
 const INPUT_CLASS =
   "w-full px-4 py-3 border border-petrol-200 rounded-lg text-petrol-800 placeholder:text-petrol-400 focus:border-petrol-500 focus:ring-1 focus:ring-petrol-500 outline-none transition";
+
+const DEFAULT_ITEMS: LineItem[] = [
+  { label: "Landing Page alapdíj", amount: "9400" },
+];
 
 export default function SenderguidePage() {
   const [type, setType] = useState<EmailType>("first_view");
   const [url, setUrl] = useState("");
   const [to, setTo] = useState("");
   const [projektneve, setProjektneve] = useState("");
+  const [items, setItems] = useState<LineItem[]>(DEFAULT_ITEMS);
   const [downloadLink, setDownloadLink] = useState("");
   const [invoiceLink, setInvoiceLink] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
 
-  const buildBody = (): Record<string, string> => {
-    const base: Record<string, string> = { type, to: to.trim() };
+  const buildBody = (): Record<string, unknown> => {
+    const base: Record<string, unknown> = { type, to: to.trim() };
     if (type === "first_view" || type === "product_ready") {
       base.url = url.trim();
     }
     if (type === "product_ready") {
       base.projektneve = projektneve.trim();
+      base.items = items
+        .filter((i) => i.label.trim())
+        .map((i) => ({
+          label: i.label.trim(),
+          amount: parseInt(i.amount, 10) || 0,
+        }))
+        .filter((i) => i.amount > 0);
     }
     if (type === "complete") {
       base.downloadLink = downloadLink.trim();
@@ -31,6 +45,15 @@ export default function SenderguidePage() {
     }
     return base;
   };
+
+  const updateItem = (index: number, field: "label" | "amount", value: string) => {
+    setItems((prev) =>
+      prev.map((item, i) => (i === index ? { ...item, [field]: value } : item))
+    );
+  };
+  const addItem = () => setItems((prev) => [...prev, { label: "", amount: "" }]);
+  const removeItem = (index: number) =>
+    setItems((prev) => (prev.length <= 1 ? prev : prev.filter((_, i) => i !== index)));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -126,6 +149,55 @@ export default function SenderguidePage() {
                 placeholder="pl. Nemeth Bau"
                 className={INPUT_CLASS}
               />
+            </div>
+          )}
+
+          {showProjektneve && (
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <label className="block text-sm font-medium text-petrol-700">
+                  Tételek és árak *
+                </label>
+                <button
+                  type="button"
+                  onClick={addItem}
+                  className="text-sm text-petrol-600 hover:text-petrol-800 font-medium"
+                >
+                  + Új tétel
+                </button>
+              </div>
+              <div className="space-y-3">
+                {items.map((item, index) => (
+                  <div key={index} className="flex gap-2 items-center">
+                    <input
+                      type="text"
+                      value={item.label}
+                      onChange={(e) => updateItem(index, "label", e.target.value)}
+                      placeholder="pl. Landing Page alapdíj"
+                      className={`${INPUT_CLASS} flex-1`}
+                    />
+                    <input
+                      type="number"
+                      min={0}
+                      value={item.amount}
+                      onChange={(e) => updateItem(index, "amount", e.target.value)}
+                      placeholder="Ft"
+                      className={`${INPUT_CLASS} w-24`}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeItem(index)}
+                      className="p-2 text-petrol-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                      title="Tétel törlése"
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs text-petrol-500 mt-1">
+                Az emailben tételesen jelenik meg a lista és a fizetendő összeg.
+              </p>
             </div>
           )}
 

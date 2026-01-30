@@ -63,9 +63,22 @@ function buildFirstViewHtml(url: string): string {
   `;
 }
 
-function buildProductReadyHtml(url: string, projektneve: string): string {
+function formatHuf(n: number): string {
+  return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
+type ProductReadyItem = { label: string; amount: number };
+
+function buildProductReadyHtml(url: string, projektneve: string, items: ProductReadyItem[]): string {
   const safeUrl = escapeHtml(url);
   const safeProjekt = escapeHtml(projektneve);
+  const total = items.reduce((sum, i) => sum + i.amount, 0);
+  const itemsRows = items
+    .map(
+      (i) =>
+        `<p style="margin: 4px 0;">${escapeHtml(i.label)} – ${formatHuf(i.amount)} Ft</p>`
+    )
+    .join('');
   return `
     <!DOCTYPE html>
     <html>
@@ -86,7 +99,8 @@ function buildProductReadyHtml(url: string, projektneve: string): string {
             <div style="background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin: 16px 0;">
               <p style="margin: 4px 0;">Név: Vakarcs Tamás e.v.</p>
               <p style="margin: 4px 0;">Számlaszám: 10700196-56885288-51100005</p>
-              <p style="margin: 4px 0;">Fizetendő: 9.400 HUF</p>
+              ${itemsRows}
+              <p style="margin: 8px 0 4px 0; font-weight: bold;">Fizetendő: ${formatHuf(total)} Ft</p>
               <p style="margin: 4px 0;">Közlemény: ${safeProjekt}</p>
             </div>
             <p style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #eee;">
@@ -136,7 +150,7 @@ function buildCompleteHtml(downloadLink: string, invoiceLink: string): string {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { type, url, to, projektneve, downloadLink, invoiceLink } = body;
+    const { type, url, to, projektneve, downloadLink, invoiceLink, items: rawItems } = body;
 
     if (!VALID_TYPES.includes(type)) {
       return NextResponse.json(
@@ -163,6 +177,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    let productReadyItems: ProductReadyItem[] = [];
     if (type === 'product_ready') {
       const validUrl = validateUrl(url ?? '');
       if (!validUrl) {
@@ -177,6 +192,30 @@ export async function POST(request: NextRequest) {
           { error: 'A projekt neve kötelező.' },
           { status: 400 }
         );
+      }
+      if (!Array.isArray(rawItems) || rawItems.length === 0) {
+        return NextResponse.json(
+          { error: 'Legalább egy tétel (megnevezés + ár) szükséges a Product ready emailhez.' },
+          { status: 400 }
+        );
+      }
+      for (let i = 0; i < rawItems.length; i++) {
+        const row = rawItems[i];
+        const label = typeof row?.label === 'string' ? row.label.trim() : '';
+        const amount = typeof row?.amount === 'number' ? row.amount : Number(row?.amount);
+        if (!label) {
+          return NextResponse.json(
+            { error: `A ${i + 1}. tétel megnevezése kötelező.` },
+            { status: 400 }
+          );
+        }
+        if (!Number.isFinite(amount) || amount < 0) {
+          return NextResponse.json(
+            { error: `A ${i + 1}. tétel ára érvényes szám legyen (Ft).` },
+            { status: 400 }
+          );
+        }
+        productReadyItems.push({ label, amount: Math.round(amount) });
       }
     }
 
@@ -218,7 +257,7 @@ export async function POST(request: NextRequest) {
     } else if (type === 'product_ready') {
       subject = 'Weboldalad elkészült - BrillCode';
       const proj = (typeof projektneve === 'string' && projektneve.trim() ? projektneve.trim() : '') as string;
-      html = buildProductReadyHtml(validateUrl(url)!, proj);
+      html = buildProductReadyHtml(validateUrl(url)!, proj, productReadyItems);
     } else {
       subject = 'Sikeres fizetés - BrillCode';
       html = buildCompleteHtml(completeDownloadLink!, completeInvoiceLink!);
