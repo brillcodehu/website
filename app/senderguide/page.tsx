@@ -166,36 +166,48 @@ export default function SenderguidePage() {
                   + Új tétel
                 </button>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {items.map((item, index) => (
-                  <div key={index} className="flex gap-2 items-center">
-                    <input
-                      type="text"
-                      value={item.label}
-                      onChange={(e) => updateItem(index, "label", e.target.value)}
-                      placeholder="pl. Landing Page alapdíj"
-                      className={`${INPUT_CLASS} flex-1`}
-                    />
-                    <input
-                      type="number"
-                      min={0}
-                      value={item.amount}
-                      onChange={(e) => updateItem(index, "amount", e.target.value)}
-                      placeholder="Ft"
-                      className={`${INPUT_CLASS} w-24`}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => removeItem(index)}
-                      className="p-2 text-petrol-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                      title="Tétel törlése"
-                    >
-                      ×
-                    </button>
+                  <div key={index} className="border border-petrol-200 rounded-xl p-3 bg-petrol-50/40 space-y-3">
+                    <div>
+                      <label className="block text-xs font-medium text-petrol-600 mb-1">
+                        Tétel megnevezése
+                      </label>
+                      <input
+                        type="text"
+                        value={item.label}
+                        onChange={(e) => updateItem(index, "label", e.target.value)}
+                        placeholder="pl. Landing Page alapdíj, 1 nyelv fordítás…"
+                        className={INPUT_CLASS}
+                      />
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="flex-1 min-w-0">
+                        <label className="block text-xs font-medium text-petrol-600 mb-1">
+                          Ár (Ft)
+                        </label>
+                        <input
+                          type="number"
+                          min={0}
+                          value={item.amount}
+                          onChange={(e) => updateItem(index, "amount", e.target.value)}
+                          placeholder="0"
+                          className={INPUT_CLASS}
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => removeItem(index)}
+                        className="mt-5 p-2.5 text-petrol-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors shrink-0"
+                        title="Tétel törlése"
+                      >
+                        ×
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
-              <p className="text-xs text-petrol-500 mt-1">
+              <p className="text-xs text-petrol-500 mt-2">
                 Az emailben tételesen jelenik meg a lista és a fizetendő összeg.
               </p>
             </div>
